@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 import {
   IconPaw as PawIcon,
   IconMenu2 as MenuIcon,
@@ -17,7 +18,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white flex flex-col pb-16 md:pb-0">
       {/* Header */}
       <header className="flex items-center justify-between px-6 md:px-12 py-4 border-b border-gray-200">
         <span className="font-semibold text-lg flex items-center gap-2">
@@ -48,7 +49,7 @@ export default function Home() {
       </section>
 
       {/* Species grid */}
-      <section className="px-6 md:px-12 py-10 max-w-5xl mx-auto">
+      <section className="px-6 md:px-12 py-10 max-w-5xl mx-auto w-full">
         <p className="text-sm text-gray-500 mb-4">Browse by species</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {[
@@ -68,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* Featured articles */}
-      <section className="px-6 md:px-12 pb-16 max-w-5xl mx-auto">
+      <section className="px-6 md:px-12 pb-16 max-w-5xl mx-auto w-full">
         <p className="text-sm text-gray-500 mb-4">Featured articles</p>
         <div className="grid sm:grid-cols-2 gap-3">
           <ArticleRow
@@ -89,6 +90,8 @@ export default function Home() {
           />
         </div>
       </section>
+
+      <Footer />
 
       {/* Mobile bottom nav */}
       <nav className="md:hidden flex justify-around py-3 border-t border-gray-200 fixed bottom-0 left-0 right-0 bg-white">

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 import {
   IconArrowLeft as ArrowLeftIcon,
   IconCircleCheck as CircleCheckIcon,
@@ -45,6 +46,7 @@ export default function HealthArticle() {
           </button>
         </Link>
       </div>
+      <Footer />
     </div>
   );
 }

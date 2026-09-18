@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 import { IconArrowLeft as ArrowLeftIcon } from '@tabler/icons-react';
 
 export default function Insurance() {
@@ -46,6 +47,7 @@ export default function Insurance() {
           Get a quote
         </button>
       </div>
+      <Footer />
     </div>
   );
 }
