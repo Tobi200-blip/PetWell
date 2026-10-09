@@ -15,6 +15,12 @@ import {
   IconArrowRight as ArrowRightIcon,
 } from '@tabler/icons-react';
 
+const species = [
+  { image: dogsImg, label: "Dogs", desc: "20+ breed guides", to: "/breeds", available: true },
+  { image: catsImg, label: "Cats", desc: "Guides on the way", to: null, available: false },
+  { image: birdsImg, label: "Birds", desc: "Guides on the way", to: null, available: false },
+];
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white flex flex-col pb-16 md:pb-0">
@@ -28,6 +34,7 @@ export default function Home() {
           className="absolute inset-0 w-full h-full object-cover opacity-85"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-black/10" />
         <div className="relative z-10 px-6 md:px-16 max-w-xl">
           <span className="inline-block text-xs bg-white/20 text-white px-3 py-1 rounded-full mb-4 backdrop-blur-sm">
             Trusted by pet parents
@@ -36,7 +43,7 @@ export default function Home() {
             Give your pet the care they deserve
           </h1>
           <p className="text-sm md:text-base text-white/85 mb-6 max-w-md">
-            Breed guides, nutrition advice, insurance comparisons, and vet-reviewed health information — all in one place.
+            Breed guides, nutrition advice, insurance comparisons, and expert health information, all in one place.
           </p>
           <div className="flex gap-3">
             <Link to="/breeds" className="bg-white text-gray-900 px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-gray-100 transition-colors">
@@ -54,7 +61,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto grid grid-cols-3 divide-x divide-gray-200">
           <Stat value="20+" label="Breed guides" />
           <Stat value="50k+" label="Pet parents" />
-          <Stat value="Vet" label="Reviewed content" />
+          <Stat value="Expert" label="Written guides" />
         </div>
       </section>
 
@@ -69,53 +76,37 @@ export default function Home() {
             View all breeds <ArrowRightIcon className="size-4" />
           </Link>
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-          {[
-            { image: dogsImg, label: "Dogs", desc: "20+ breed guides", to: "/breeds" },
-            { image: catsImg, label: "Cats", desc: "Coming soon", to: "/breeds" },
-            { image: birdsImg, label: "Birds", desc: "Coming soon", to: "/breeds" },
-          ].map(({ image, label, desc, to }) => (
-            <Link
-              key={label}
-              to={to}
-              className="relative group rounded-xl overflow-hidden h-56"
-            >
-              <img
-                src={image}
-                alt={label}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-4">
-                <p className="text-white font-semibold text-lg">{label}</p>
-                <p className="text-white/80 text-xs mt-0.5">{desc}</p>
-              </div>
-            </Link>
+          {species.map((s) => (
+            <SpeciesCard key={s.label} {...s} />
           ))}
         </div>
       </section>
 
       {/* Featured articles */}
-      <section className="px-6 md:px-12 pb-16 max-w-5xl mx-auto w-full bg-gray-50 py-14">
-        <p className="text-xl font-semibold mb-1">Featured articles</p>
-        <p className="text-sm text-gray-500 mb-6">Guidance from our editorial team</p>
-        <div className="grid sm:grid-cols-2 gap-4">
-          <ArticleRow
-            to="/article/pet-insurance"
-            icon={HeartIcon}
-            iconBg="bg-green-100"
-            iconColor="text-green-700"
-            title="Choosing the right pet insurance"
-            meta="5 min read"
-          />
-          <ArticleRow
-            to="/article/pet-insurance"
-            icon={BoneIcon}
-            iconBg="bg-amber-100"
-            iconColor="text-amber-700"
-            title="Best food by breed and age"
-            meta="4 min read"
-          />
+      <section className="bg-gray-50 py-14">
+        <div className="px-6 md:px-12 max-w-5xl mx-auto w-full">
+          <p className="text-xl font-semibold mb-1">Featured articles</p>
+          <p className="text-sm text-gray-500 mb-6">Guidance from our editorial team</p>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <ArticleRow
+              to="/article/pet-insurance"
+              icon={HeartIcon}
+              iconBg="bg-green-100"
+              iconColor="text-green-700"
+              title="Choosing the right pet insurance"
+              meta="5 min read"
+            />
+            <ArticleRow
+              to="/article/pet-insurance"
+              icon={BoneIcon}
+              iconBg="bg-amber-100"
+              iconColor="text-amber-700"
+              title="Best food by breed and age"
+              meta="4 min read"
+            />
+          </div>
         </div>
       </section>
 
@@ -129,6 +120,47 @@ export default function Home() {
         <UserIcon className="size-5 text-gray-400" />
       </nav>
     </div>
+  );
+}
+
+function SpeciesCard({ image, label, desc, to, available }) {
+  const content = (
+    <>
+      <img
+        src={image}
+        alt={label}
+        className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ${
+          available ? 'group-hover:scale-105' : 'grayscale opacity-70'
+        }`}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+      {!available && (
+        <span className="absolute top-3 right-3 text-xs bg-white/90 text-gray-700 font-medium px-3 py-1 rounded-full">
+          Coming soon
+        </span>
+      )}
+      <div className="absolute bottom-0 left-0 p-4">
+        <p className="text-white font-semibold text-lg">{label}</p>
+        <p className="text-white/80 text-xs mt-0.5">{desc}</p>
+      </div>
+    </>
+  );
+
+  if (!available) {
+    return (
+      <div
+        className="relative rounded-xl overflow-hidden h-56 cursor-not-allowed"
+        aria-disabled="true"
+      >
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <Link to={to} className="relative group rounded-xl overflow-hidden h-56 block">
+      {content}
+    </Link>
   );
 }
 

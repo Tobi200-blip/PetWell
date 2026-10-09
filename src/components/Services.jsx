@@ -10,6 +10,8 @@ import {
 } from '@tabler/icons-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import PageHero from './PageHero';
+import servicesHero from '../assets/heroes/services.jpg';
 
 const services = [
   {
@@ -57,14 +59,14 @@ export default function Services() {
     <div className="min-h-screen bg-white flex flex-col">
       <Navbar />
 
-      <section className="px-6 md:px-12 py-12 md:py-16 bg-blue-50 text-center">
-        <p className="text-2xl md:text-4xl font-semibold mb-3">Care beyond the basics</p>
-        <p className="text-sm md:text-base text-gray-500 max-w-md mx-auto">
-          Find trusted vets, groomers, boarding, and trainers near you
-        </p>
-      </section>
+      <PageHero
+        image={servicesHero}
+        badge="Pet services"
+        title="Care beyond the basics"
+        subtitle="Find trusted vets, groomers, boarding, and trainers near you."
+      />
 
-      <section className="max-w-3xl mx-auto w-full px-6 py-10">
+      <section className="max-w-3xl mx-auto w-full px-6 py-10 flex-1">
         <form onSubmit={handleSearch} className="flex gap-2 mb-10">
           <div className="flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-lg px-3 h-11 flex-1">
             <MapPinIcon className="size-4 text-gray-400" />

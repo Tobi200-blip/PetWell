@@ -1,5 +1,10 @@
 import { Link } from 'react-router-dom';
-import { IconPaw as PawIcon, IconBrandFacebook, IconBrandInstagram, IconBrandX } from '@tabler/icons-react';
+import {
+  IconPaw as PawIcon,
+  IconBrandFacebook,
+  IconBrandInstagram,
+  IconBrandX,
+} from '@tabler/icons-react';
 
 export default function Footer() {
   return (
@@ -42,25 +47,21 @@ export default function Footer() {
               { label: "Breed guides", to: "/breeds" },
               { label: "Health articles", to: "/article/pet-insurance" },
               { label: "Insurance", to: "/insurance" },
-              { label: "Pet services", to: "/" },
+              { label: "Pet services", to: "/services" },
             ]}
           />
           <FooterColumn
             title="Company"
             links={[
-              { label: "About us", to: "/" },
-              { label: "Careers", to: "/" },
-              { label: "Contact", to: "/" },
-              { label: "Press", to: "/" },
+              { label: "About us", to: "/about" },
+              { label: "Contact", to: "/contact" },
             ]}
           />
           <FooterColumn
             title="Legal"
             links={[
-              { label: "Privacy policy", to: "/" },
-              { label: "Terms of service", to: "/" },
-              { label: "Cookie policy", to: "/" },
-              { label: "Accessibility", to: "/" },
+              { label: "Privacy policy", to: "/privacy" },
+              { label: "Terms of service", to: "/terms" },
             ]}
           />
         </div>
