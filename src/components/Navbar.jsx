@@ -13,10 +13,10 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "Shop by pet", to: "/breeds" },
-    { label: "Health & Wellness", to: "/article/pet-insurance" },
+    { label: "Health & Wellness", to: "/articles?category=Health" },
     { label: "Pet Services", to: "/services" },
     { label: "Insurance", to: "/insurance" },
-    { label: "Learning Hub", to: "/article/pet-insurance" },
+    { label: "Learning Hub", to: "/articles" },
   ];
 
   return (

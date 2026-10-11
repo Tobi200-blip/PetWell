@@ -5,9 +5,9 @@ import heroImg from '../assets/hero-pets.png';
 import dogsImg from '../assets/categories/dogs.jpg';
 import catsImg from '../assets/categories/cats.jpg';
 import birdsImg from '../assets/categories/birds.jpg';
+import { getFeaturedArticles } from '../services/articleService';
+import { getCategoryMeta } from '../utils/articleCategories';
 import {
-  IconHeart as HeartIcon,
-  IconBone as BoneIcon,
   IconHome as HomeIcon,
   IconStethoscope as StethoscopeIcon,
   IconShield as ShieldIcon,
@@ -31,7 +31,9 @@ export default function Home() {
         <img
           src={heroImg}
           alt="Happy pets"
-          className="absolute inset-0 w-full h-full object-cover opacity-85"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover opacity-90"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
         <div className="absolute inset-0 bg-black/10" />
@@ -60,7 +62,7 @@ export default function Home() {
       <section className="border-b border-gray-200">
         <div className="max-w-5xl mx-auto grid grid-cols-3 divide-x divide-gray-200">
           <Stat value="20+" label="Breed guides" />
-          <Stat value="50k+" label="Pet parents" />
+          <Stat value="20" label="In-depth profiles" />
           <Stat value="Expert" label="Written guides" />
         </div>
       </section>
@@ -87,25 +89,19 @@ export default function Home() {
       {/* Featured articles */}
       <section className="bg-gray-50 py-14">
         <div className="px-6 md:px-12 max-w-5xl mx-auto w-full">
-          <p className="text-xl font-semibold mb-1">Featured articles</p>
-          <p className="text-sm text-gray-500 mb-6">Guidance from our editorial team</p>
+          <div className="flex items-end justify-between mb-6">
+            <div>
+              <p className="text-xl font-semibold mb-1">Featured articles</p>
+              <p className="text-sm text-gray-500">Guidance from our editorial team</p>
+            </div>
+            <Link to="/articles" className="hidden sm:flex items-center gap-1 text-sm text-blue-600 font-medium hover:underline">
+              Visit the learning hub <ArrowRightIcon className="size-4" />
+            </Link>
+          </div>
           <div className="grid sm:grid-cols-2 gap-4">
-            <ArticleRow
-              to="/article/pet-insurance"
-              icon={HeartIcon}
-              iconBg="bg-green-100"
-              iconColor="text-green-700"
-              title="Choosing the right pet insurance"
-              meta="5 min read"
-            />
-            <ArticleRow
-              to="/article/pet-insurance"
-              icon={BoneIcon}
-              iconBg="bg-amber-100"
-              iconColor="text-amber-700"
-              title="Best food by breed and age"
-              meta="4 min read"
-            />
+            {getFeaturedArticles().map((a) => (
+              <ArticleRow key={a.slug} article={a} />
+            ))}
           </div>
         </div>
       </section>
@@ -114,10 +110,10 @@ export default function Home() {
 
       {/* Mobile bottom nav */}
       <nav className="md:hidden flex justify-around py-3 border-t border-gray-200 fixed bottom-0 left-0 right-0 bg-white">
-        <Link to="/"><HomeIcon className="size-5 text-blue-600" /></Link>
-        <Link to="/article/pet-insurance"><StethoscopeIcon className="size-5 text-gray-400" /></Link>
-        <Link to="/insurance"><ShieldIcon className="size-5 text-gray-400" /></Link>
-        <UserIcon className="size-5 text-gray-400" />
+        <Link to="/" aria-label="Home"><HomeIcon className="size-5 text-blue-600" /></Link>
+        <Link to="/articles" aria-label="Learning hub"><StethoscopeIcon className="size-5 text-gray-400" /></Link>
+        <Link to="/insurance" aria-label="Insurance"><ShieldIcon className="size-5 text-gray-400" /></Link>
+        <Link to="/contact" aria-label="Contact"><UserIcon className="size-5 text-gray-400" /></Link>
       </nav>
     </div>
   );
@@ -129,6 +125,8 @@ function SpeciesCard({ image, label, desc, to, available }) {
       <img
         src={image}
         alt={label}
+        loading="lazy"
+        decoding="async"
         className={`absolute inset-0 w-full h-full object-cover transition-transform duration-300 ${
           available ? 'group-hover:scale-105' : 'grayscale opacity-70'
         }`}
@@ -173,15 +171,19 @@ function Stat({ value, label }) {
   );
 }
 
-function ArticleRow({ to, icon: Icon, iconBg, iconColor, title, meta }) {
+function ArticleRow({ article }) {
+  const { icon: Icon, bg, color } = getCategoryMeta(article.category);
   return (
-    <Link to={to} className="flex gap-3 items-center bg-white rounded-lg p-4 hover:shadow-sm transition-shadow">
-      <div className={`size-10 rounded-lg ${iconBg} flex items-center justify-center shrink-0`}>
-        <Icon className={`size-[18px] ${iconColor}`} />
+    <Link
+      to={`/articles/${article.slug}`}
+      className="flex gap-3 items-center bg-white rounded-lg p-4 hover:shadow-sm transition-shadow"
+    >
+      <div className={`size-10 rounded-lg ${bg} flex items-center justify-center shrink-0`}>
+        <Icon className={`size-[18px] ${color}`} />
       </div>
       <div>
-        <p className="text-sm font-medium">{title}</p>
-        <p className="text-xs text-gray-400">{meta}</p>
+        <p className="text-sm font-medium">{article.title}</p>
+        <p className="text-xs text-gray-400">{article.readTime} min read</p>
       </div>
     </Link>
   );

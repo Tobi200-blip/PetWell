@@ -1,5 +1,9 @@
 import { breeds } from '../data/breeds';
 import { breedProfiles } from '../data/breedProfiles';
+import { moreBreedProfiles } from '../data/moreBreedProfiles';
+
+// All long-form profiles, merged. Add future profile files here.
+const allProfiles = { ...breedProfiles, ...moreBreedProfiles };
 
 // Fallback groups (American Kennel Club system) for the breeds already in breeds.js.
 // For new breeds, add a `group` field directly in the breed's entry in breeds.js.
@@ -42,7 +46,7 @@ export function getBreedGroups() {
 export function getBreedBySlug(slug) {
   const base = allBreeds.find((b) => b.slug === slug);
   if (!base) return null;
-  return { ...base, profile: breedProfiles[slug] || null };
+  return { ...base, profile: allProfiles[slug] || null };
 }
 
 export function getSimilarBreeds(slug, limit = 3) {

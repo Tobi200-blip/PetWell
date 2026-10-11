@@ -1,16 +1,38 @@
+import { useState } from 'react';
 import { IconCheck as CheckIcon } from '@tabler/icons-react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import PageHero from './PageHero';
+import QuoteForm from './QuoteForm';
 import insuranceHero from '../assets/heroes/insurance.jpg';
 
 const plans = [
-  { name: "Basic", price: 18, desc: "Accident-only coverage", featured: false, features: ["Accidents and injuries", "24/7 claims support"] },
-  { name: "Complete", price: 34, desc: "Accident, illness, and hereditary conditions", featured: true, features: ["Everything in Basic", "Illness and hereditary conditions", "Prescription coverage"] },
-  { name: "Premium", price: 52, desc: "Everything plus wellness and dental", featured: false, features: ["Everything in Complete", "Routine wellness visits", "Dental care"] },
+  {
+    name: "Basic",
+    price: 18,
+    desc: "Accident-only coverage",
+    featured: false,
+    features: ["Accidents and injuries", "24/7 claims support"],
+  },
+  {
+    name: "Complete",
+    price: 34,
+    desc: "Accident, illness, and hereditary conditions",
+    featured: true,
+    features: ["Everything in Basic", "Illness and hereditary conditions", "Prescription coverage"],
+  },
+  {
+    name: "Premium",
+    price: 52,
+    desc: "Everything plus wellness and dental",
+    featured: false,
+    features: ["Everything in Complete", "Routine wellness visits", "Dental care"],
+  },
 ];
 
 export default function Insurance() {
+  const [quotePlan, setQuotePlan] = useState(null);
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Navbar />
@@ -27,7 +49,9 @@ export default function Insurance() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`bg-gray-50 rounded-xl p-6 flex flex-col ${plan.featured ? "border-2 border-blue-500" : "border border-transparent"}`}
+              className={`bg-gray-50 rounded-xl p-6 flex flex-col ${
+                plan.featured ? "border-2 border-blue-500" : "border border-transparent"
+              }`}
             >
               {plan.featured && (
                 <span className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-lg self-start mb-3">
@@ -36,7 +60,8 @@ export default function Insurance() {
               )}
               <p className="font-semibold">{plan.name}</p>
               <p className="text-3xl font-bold mt-2">
-                ${plan.price}<span className="text-sm font-normal text-gray-400">/mo</span>
+                ${plan.price}
+                <span className="text-sm font-normal text-gray-400">/mo</span>
               </p>
               <p className="text-sm text-gray-500 mt-2 mb-5">{plan.desc}</p>
               <ul className="flex flex-col gap-2 mb-6 flex-1">
@@ -46,7 +71,10 @@ export default function Insurance() {
                   </li>
                 ))}
               </ul>
-              <button className="w-full h-11 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-700 transition-colors">
+              <button
+                onClick={() => setQuotePlan(plan.name)}
+                className="w-full h-11 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-700 transition-colors"
+              >
                 Get a quote
               </button>
             </div>
@@ -56,6 +84,8 @@ export default function Insurance() {
           Prices shown are illustrative examples. Actual premiums vary by breed, age, and location.
         </p>
       </div>
+
+      {quotePlan && <QuoteForm plan={quotePlan} onClose={() => setQuotePlan(null)} />}
 
       <Footer />
     </div>
