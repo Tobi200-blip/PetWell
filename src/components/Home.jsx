@@ -6,6 +6,7 @@ import dogsImg from '../assets/categories/dogs.jpg';
 import catsImg from '../assets/categories/cats.jpg';
 import birdsImg from '../assets/categories/birds.jpg';
 import { getFeaturedArticles } from '../services/articleService';
+import { getBreedCounts } from '../services/breedService';
 import { getCategoryMeta } from '../utils/articleCategories';
 import {
   IconHome as HomeIcon,
@@ -15,8 +16,10 @@ import {
   IconArrowRight as ArrowRightIcon,
 } from '@tabler/icons-react';
 
+const counts = getBreedCounts();
+
 const species = [
-  { image: dogsImg, label: "Dogs", desc: "20+ breed guides", to: "/breeds", available: true },
+  { image: dogsImg, label: "Dogs", desc: `${counts.total} breed guides`, to: "/breeds", available: true },
   { image: catsImg, label: "Cats", desc: "Guides on the way", to: null, available: false },
   { image: birdsImg, label: "Birds", desc: "Guides on the way", to: null, available: false },
 ];
@@ -61,8 +64,8 @@ export default function Home() {
       {/* Stats bar */}
       <section className="border-b border-gray-200">
         <div className="max-w-5xl mx-auto grid grid-cols-3 divide-x divide-gray-200">
-          <Stat value="20+" label="Breed guides" />
-          <Stat value="20" label="In-depth profiles" />
+          <Stat value={counts.total} label="Breed guides" />
+          <Stat value={counts.profiled} label="In-depth profiles" />
           <Stat value="Expert" label="Written guides" />
         </div>
       </section>

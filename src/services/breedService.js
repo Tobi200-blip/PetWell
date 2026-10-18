@@ -1,13 +1,21 @@
 import { breeds } from '../data/breeds';
+import { breedsBatch2 } from '../data/breedsBatch2';
 import { breedProfiles } from '../data/breedProfiles';
 import { moreBreedProfiles } from '../data/moreBreedProfiles';
+import { breedProfilesBatch2 } from '../data/breedProfilesBatch2';
 
 // All long-form profiles, merged. Add future profile files here.
-const allProfiles = { ...breedProfiles, ...moreBreedProfiles };
+const allProfiles = {
+  ...breedProfiles,
+  ...moreBreedProfiles,
+  ...breedProfilesBatch2,
+};
 
-// Fallback groups (American Kennel Club system) for the breeds already in breeds.js.
-// For new breeds, add a `group` field directly in the breed's entry in breeds.js.
-// An entry's own `group` always wins over this map.
+// All quick-facts entries, merged. Add future batches here.
+const sourceBreeds = [...breeds, ...breedsBatch2];
+
+// Fallback groups (American Kennel Club system) for the original 20 breeds.
+// Newer entries carry their own `group` field, which always wins over this map.
 const breedGroupMap = {
   "golden-retriever": "Sporting",
   "labrador-retriever": "Sporting",
@@ -31,7 +39,13 @@ const breedGroupMap = {
   "bernese-mountain-dog": "Working",
 };
 
-const allBreeds = breeds
+// Drop accidental duplicates (first entry for a slug wins)
+const seen = new Set();
+const uniqueBreeds = sourceBreeds.filter(
+  (b) => !seen.has(b.slug) && seen.add(b.slug)
+);
+
+const allBreeds = uniqueBreeds
   .map((b) => ({ ...b, group: b.group || breedGroupMap[b.slug] || "Other" }))
   .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -41,6 +55,13 @@ export function getBreeds() {
 
 export function getBreedGroups() {
   return [...new Set(allBreeds.map((b) => b.group))].sort();
+}
+
+export function getBreedCounts() {
+  return {
+    total: allBreeds.length,
+    profiled: allBreeds.filter((b) => allProfiles[b.slug]).length,
+  };
 }
 
 export function getBreedBySlug(slug) {
