@@ -1,18 +1,24 @@
 import { breeds } from '../data/breeds';
 import { breedsBatch2 } from '../data/breedsBatch2';
+import { breedsBatch3 } from '../data/breedsBatch3';
+import { breedsBatch4 } from '../data/breedsBatch4';
 import { breedProfiles } from '../data/breedProfiles';
 import { moreBreedProfiles } from '../data/moreBreedProfiles';
 import { breedProfilesBatch2 } from '../data/breedProfilesBatch2';
+import { breedProfilesBatch3 } from '../data/breedProfilesBatch3';
+import { breedProfilesBatch4 } from '../data/breedProfilesBatch4';
 
 // All long-form profiles, merged. Add future profile files here.
 const allProfiles = {
   ...breedProfiles,
   ...moreBreedProfiles,
   ...breedProfilesBatch2,
+  ...breedProfilesBatch3,
+  ...breedProfilesBatch4,
 };
 
 // All quick-facts entries, merged. Add future batches here.
-const sourceBreeds = [...breeds, ...breedsBatch2];
+const sourceBreeds = [...breeds, ...breedsBatch2, ...breedsBatch3, ...breedsBatch4];
 
 // Fallback groups (American Kennel Club system) for the original 20 breeds.
 // Newer entries carry their own `group` field, which always wins over this map.
