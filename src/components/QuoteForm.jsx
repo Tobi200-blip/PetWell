@@ -64,6 +64,7 @@ export default function QuoteForm({ plan, onClose }) {
 
     setStatus('loading');
     setServerError('');
+    // The form type stays "quote" so the server needs no changes; it is a waitlist request
     const result = await submitForm('quote', {
       plan,
       name: form.name.trim(),
@@ -97,13 +98,13 @@ export default function QuoteForm({ plan, onClose }) {
         <div className="flex items-start justify-between p-6 pb-2">
           <div>
             <h2 id="quote-title" className="text-xl font-semibold">
-              Get a quote
+              Get notified
             </h2>
-            <p className="text-sm text-gray-500 mt-1">
-              {plan} plan. Tell us about your pet and we'll follow up.
+            <p className="text-sm text-gray-600 mt-1">
+              {plan} plan preview. Leave your details and we'll email you when plans open.
             </p>
           </div>
-          <button onClick={onClose} aria-label="Close" className="p-1 -mr-1 text-gray-400 hover:text-gray-700">
+          <button onClick={onClose} aria-label="Close" className="p-1 -mr-1 text-gray-500 hover:text-gray-800">
             <XIcon className="size-5" />
           </button>
         </div>
@@ -111,9 +112,9 @@ export default function QuoteForm({ plan, onClose }) {
         {status === 'success' ? (
           <div className="p-6 pt-4">
             <div className="bg-green-50 text-green-700 rounded-xl p-5 text-center">
-              <p className="font-semibold mb-1">Request received</p>
+              <p className="font-semibold mb-1">You're on the list</p>
               <p className="text-sm">
-                Thanks, {form.name.split(' ')[0] || 'there'}. We'll be in touch at your email address soon.
+                Thanks, {form.name.split(' ')[0] || 'there'}. We'll email you when pet insurance plans become available.
               </p>
             </div>
             <button
@@ -184,14 +185,14 @@ export default function QuoteForm({ plan, onClose }) {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="h-11 bg-gray-900 text-white rounded-lg text-sm font-medium hover:bg-gray-700 transition-colors disabled:opacity-60"
+              className="h-11 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors disabled:opacity-60"
             >
-              {status === 'loading' ? 'Sending...' : 'Request my quote'}
+              {status === 'loading' ? 'Sending...' : 'Notify me'}
             </button>
 
-            <p className="text-xs text-gray-400 text-center">
-              By submitting you agree to our{' '}
-              <Link to="/privacy" className="underline hover:text-gray-600">privacy policy</Link>.
+            <p className="text-xs text-gray-500 text-center">
+              This is not an application for insurance. By submitting you agree to our{' '}
+              <Link to="/privacy" className="underline hover:text-gray-700">privacy policy</Link>.
             </p>
           </form>
         )}

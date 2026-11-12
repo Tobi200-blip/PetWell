@@ -7,14 +7,21 @@ import { moreBreedProfiles } from '../data/moreBreedProfiles';
 import { breedProfilesBatch2 } from '../data/breedProfilesBatch2';
 import { breedProfilesBatch3 } from '../data/breedProfilesBatch3';
 import { breedProfilesBatch4 } from '../data/breedProfilesBatch4';
+import { breedProfilesExpanded } from '../data/breedProfilesExpanded';
+import { breedProfilesExpanded2 } from '../data/breedProfilesExpanded2';
+import { breedProfilesExpanded3 } from '../data/breedProfilesExpanded3';
 
-// All long-form profiles, merged. Add future profile files here.
+// All long-form profiles, merged. Expanded profiles come last, so they replace
+// the shorter version of the same breed. Add future profile files here.
 const allProfiles = {
   ...breedProfiles,
   ...moreBreedProfiles,
   ...breedProfilesBatch2,
   ...breedProfilesBatch3,
   ...breedProfilesBatch4,
+  ...breedProfilesExpanded,
+  ...breedProfilesExpanded2,
+  ...breedProfilesExpanded3,
 };
 
 // All quick-facts entries, merged. Add future batches here.

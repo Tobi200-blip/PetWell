@@ -1,10 +1,12 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import ScrollToTop from './components/ScrollToTop';
+import RouteMeta from './components/RouteMeta';
 import Home from './components/Home';
 import Breeds from './components/Breeds';
 import BreedDetail from './components/BreedDetail';
 import Articles from './components/Articles';
 import ArticleDetail from './components/ArticleDetail';
+import Search from './components/Search';
 import Insurance from './components/Insurance';
 import Services from './components/Services';
 import About from './components/About';
@@ -17,12 +19,14 @@ function App() {
   return (
     <>
       <ScrollToTop />
+      <RouteMeta />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/breeds" element={<Breeds />} />
         <Route path="/breed/:slug" element={<BreedDetail />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/articles/:slug" element={<ArticleDetail />} />
+        <Route path="/search" element={<Search />} />
         <Route
           path="/article/pet-insurance"
           element={<Navigate to="/articles/choosing-pet-insurance" replace />}

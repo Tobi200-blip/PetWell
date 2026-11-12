@@ -1,1 +1,17 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+/* Brand palette: deep royal blue (#173B65 is blue-600).
+   Overriding Tailwind's blue scale recolors every blue-* class on the site at once. */
+@theme {
+  --color-blue-50: #f0f5fb;
+  --color-blue-100: #dde8f5;
+  --color-blue-200: #bcd1ea;
+  --color-blue-300: #8db1d8;
+  --color-blue-400: #5b8cc2;
+  --color-blue-500: #2f64a0;
+  --color-blue-600: #173b65;
+  --color-blue-700: #12304f;
+  --color-blue-800: #0e253d;
+  --color-blue-900: #0a1a2c;
+  --color-blue-950: #060f1a;
+}

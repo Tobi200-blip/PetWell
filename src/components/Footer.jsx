@@ -1,12 +1,20 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  IconPaw as PawIcon,
   IconBrandFacebook,
   IconBrandInstagram,
   IconBrandX,
 } from '@tabler/icons-react';
 import { submitForm, isValidEmail } from '../services/formService';
+import Logo from './Logo';
+
+// Add your real social page URLs below. An icon only appears once it has a URL,
+// so the footer never shows buttons that lead nowhere.
+const socials = [
+  { label: 'Facebook', icon: IconBrandFacebook, href: '' },
+  { label: 'Instagram', icon: IconBrandInstagram, href: '' },
+  { label: 'X', icon: IconBrandX, href: '' },
+].filter((s) => s.href);
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -45,13 +53,13 @@ export default function Footer() {
   };
 
   return (
-    <footer className="border-t border-gray-200 bg-gray-900 text-gray-300">
+    <footer className="bg-blue-900 text-blue-100">
       {/* Newsletter */}
-      <div className="border-b border-gray-800 px-6 md:px-12 py-10">
+      <div className="border-b border-blue-800 px-6 md:px-12 py-10">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <p className="text-white font-semibold text-lg">Join our pet care newsletter</p>
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-sm text-blue-200 mt-1">
               Breed tips, health reminders, and offers, monthly, no spam.
             </p>
           </div>
@@ -68,7 +76,7 @@ export default function Footer() {
                 placeholder="Your email"
                 aria-label="Email address"
                 disabled={status === 'loading'}
-                className="bg-gray-800 text-white text-sm px-4 py-2.5 rounded-lg outline-none flex-1 sm:w-64 focus:ring-1 focus:ring-blue-500 disabled:opacity-60"
+                className="bg-blue-800 text-white placeholder:text-blue-300 text-sm px-4 py-2.5 rounded-lg outline-none flex-1 sm:w-64 focus:ring-2 focus:ring-blue-300 disabled:opacity-60"
               />
               {/* Honeypot: hidden from people, visible to bots */}
               <input
@@ -84,7 +92,7 @@ export default function Footer() {
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="bg-blue-600 text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-blue-500 transition-colors whitespace-nowrap disabled:opacity-60"
+                className="bg-white text-blue-700 text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-blue-50 transition-colors whitespace-nowrap disabled:opacity-60"
               >
                 {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
               </button>
@@ -92,7 +100,11 @@ export default function Footer() {
             <p
               aria-live="polite"
               className={`text-xs mt-2 min-h-4 ${
-                status === 'success' ? 'text-green-400' : status === 'error' ? 'text-red-400' : 'text-gray-500'
+                status === 'success'
+                  ? 'text-green-300'
+                  : status === 'error'
+                  ? 'text-red-300'
+                  : 'text-blue-300'
               }`}
             >
               {status === 'success' || status === 'error' ? (
@@ -100,7 +112,7 @@ export default function Footer() {
               ) : (
                 <>
                   By subscribing you agree to our{' '}
-                  <Link to="/privacy" className="underline hover:text-gray-300">
+                  <Link to="/privacy" className="underline hover:text-white">
                     privacy policy
                   </Link>
                   .
@@ -114,19 +126,16 @@ export default function Footer() {
       {/* Link columns */}
       <div className="px-6 md:px-12 py-12">
         <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-8">
-          <div>
-            <span className="text-white font-semibold text-base flex items-center gap-2 mb-4">
-              <PawIcon className="size-5 text-blue-400" />
-              PetWell
-            </span>
-            <p className="text-sm text-gray-400 max-w-xs">
-              Expert-written guidance for every stage of your pet's life.
+          <div className="col-span-2 sm:col-span-1">
+            <Logo onDark className="mb-4" />
+            <p className="text-sm text-blue-200 max-w-xs">
+              Practical pet care guides, breed profiles, and insurance information, all in one place.
             </p>
           </div>
           <FooterColumn
             title="Explore"
             links={[
-              { label: "Breed guides", to: "/breeds" },
+              { label: "Dog breeds", to: "/breeds" },
               { label: "Learning hub", to: "/articles" },
               { label: "Insurance", to: "/insurance" },
               { label: "Pet services", to: "/services" },
@@ -150,14 +159,27 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-gray-800 px-6 md:px-12 py-6">
+      <div className="border-t border-blue-800 px-6 md:px-12 py-6">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-500">© 2026 PetWell. All rights reserved.</p>
-          <div className="flex gap-4">
-            <IconBrandFacebook className="size-4 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-            <IconBrandInstagram className="size-4 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-            <IconBrandX className="size-4 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-          </div>
+          <p className="text-xs text-blue-300">
+            © {new Date().getFullYear()} AllPetsLoft. All rights reserved.
+          </p>
+          {socials.length > 0 && (
+            <div className="flex gap-3">
+              {socials.map(({ label, icon: Icon, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="size-9 rounded-full bg-blue-800 text-blue-100 flex items-center justify-center hover:bg-white hover:text-blue-700 transition-colors"
+                >
+                  <Icon className="size-[18px]" stroke={2} />
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </footer>
@@ -171,7 +193,7 @@ function FooterColumn({ title, links }) {
       <ul className="flex flex-col gap-2.5">
         {links.map(({ label, to }) => (
           <li key={label}>
-            <Link to={to} className="text-sm text-gray-400 hover:text-white transition-colors">
+            <Link to={to} className="text-sm text-blue-200 hover:text-white transition-colors">
               {label}
             </Link>
           </li>
