@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import ScrollToTop from './components/ScrollToTop';
 import RouteMeta from './components/RouteMeta';
 import Home from './components/Home';
@@ -39,6 +40,7 @@ function App() {
         <Route path="/terms" element={<Terms />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Analytics />
     </>
   );
 }
