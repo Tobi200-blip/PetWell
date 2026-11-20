@@ -9,7 +9,7 @@ import {
   IconRosetteDiscountCheck as VerifiedIcon,
 } from '@tabler/icons-react';
 import { getBreedBySlug, getSimilarBreeds } from '../services/breedService';
-import { getBreedImage } from '../utils/breedImages';
+import { getBreedImage, getBreedFigure } from '../utils/breedImages';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import NotFound from './NotFound';
@@ -310,9 +310,11 @@ function SectionBody({ section, breed }) {
   return (
     <>
       {section.paragraphs?.map((p, i) => (
-        <p key={i} className="text-sm md:text-base text-gray-600 leading-relaxed mb-4">
-          {p}
-        </p>
+        <div key={i}>
+          <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-4">{p}</p>
+          {/* Small photo card after the first paragraph (only if the image file exists) */}
+          {i === 0 && <SectionFigure figure={section.figure} breed={breed} />}
+        </div>
       ))}
 
       {section.lists?.map((list, i) => (
@@ -352,6 +354,29 @@ function SectionBody({ section, breed }) {
       {section.id === 'feeding' && <FoodCard breed={breed} />}
       {section.id === 'health' && <HealthTags issues={breed.issues} />}
     </>
+  );
+}
+
+function SectionFigure({ figure, breed }) {
+  if (!figure) return null;
+  const src = getBreedFigure(breed.slug, figure.n);
+  if (!src) return null;
+
+  return (
+    <figure className="mb-5 sm:max-w-md rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
+      <img
+        src={src}
+        alt={figure.alt || breed.name}
+        loading="lazy"
+        decoding="async"
+        className="w-full aspect-[16/10] object-cover"
+      />
+      {figure.caption && (
+        <figcaption className="px-4 py-2.5 text-xs text-gray-600 leading-relaxed">
+          {figure.caption}
+        </figcaption>
+      )}
+    </figure>
   );
 }
 

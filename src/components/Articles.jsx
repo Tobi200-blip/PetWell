@@ -3,6 +3,8 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { IconSearch as SearchIcon, IconX as XIcon } from '@tabler/icons-react';
 import { getArticles, getCategories } from '../services/articleService';
 import { getCategoryMeta } from '../utils/articleCategories';
+import { getArticleImage } from '../utils/articleImages';
+import { articleMedia } from '../data/articleMedia';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import PageHero from './PageHero';
@@ -108,21 +110,39 @@ export default function Articles() {
 
 function ArticleCard({ article }) {
   const { icon: Icon, bg, color } = getCategoryMeta(article.category);
+  const hero = articleMedia[article.slug]?.hero;
+  const image = getArticleImage(hero?.file);
 
   return (
     <Link
       to={`/articles/${article.slug}`}
-      className="group bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition-shadow flex flex-col"
+      className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow flex flex-col"
     >
-      <div className={`size-11 rounded-lg ${bg} flex items-center justify-center mb-4`}>
-        <Icon className={`size-5 ${color}`} />
+      {/* Image first, so readers see the photo before they click */}
+      {image ? (
+        <img
+          src={image}
+          alt={hero?.alt || article.title}
+          loading="lazy"
+          decoding="async"
+          className="w-full aspect-[16/10] object-cover group-hover:scale-[1.02] transition-transform duration-300"
+        />
+      ) : (
+        <div className={`w-full aspect-[16/10] ${bg} flex items-center justify-center`}>
+          <Icon className={`size-12 ${color}`} stroke={1.5} />
+        </div>
+      )}
+
+      <div className="p-5 flex flex-col flex-1">
+        <p className="text-xs font-semibold text-blue-600 uppercase tracking-wide mb-1.5">
+          {article.category}
+        </p>
+        <p className="text-base font-semibold leading-snug mb-2 group-hover:text-blue-600 transition-colors">
+          {article.title}
+        </p>
+        <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">{article.excerpt}</p>
+        <p className="text-xs text-gray-400">{article.readTime} min read</p>
       </div>
-      <p className="text-xs text-gray-400 mb-1">{article.category}</p>
-      <p className="text-base font-semibold leading-snug mb-2 group-hover:text-blue-600 transition-colors">
-        {article.title}
-      </p>
-      <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">{article.excerpt}</p>
-      <p className="text-xs text-gray-400">{article.readTime} min read</p>
     </Link>
   );
 }

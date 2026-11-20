@@ -10,6 +10,27 @@ import { breedProfilesBatch4 } from '../data/breedProfilesBatch4';
 import { breedProfilesExpanded } from '../data/breedProfilesExpanded';
 import { breedProfilesExpanded2 } from '../data/breedProfilesExpanded2';
 import { breedProfilesExpanded3 } from '../data/breedProfilesExpanded3';
+import { breedProfilesExpanded4 } from '../data/breedProfilesExpanded4';
+import { breedProfilesExpanded5 } from '../data/breedProfilesExpanded5';
+import { breedProfilesExpanded6 } from '../data/breedProfilesExpanded6';
+import { breedProfilesExpanded7 } from '../data/breedProfilesExpanded7';
+import { breedProfilesExpanded8 } from '../data/breedProfilesExpanded8';
+import { breedProfilesExpanded9 } from '../data/breedProfilesExpanded9';
+import { breedProfilesExpanded10 } from '../data/breedProfilesExpanded10';
+import { breedProfilesExpanded11 } from '../data/breedProfilesExpanded11';
+import { breedProfilesExpanded12 } from '../data/breedProfilesExpanded12';
+import { breedProfilesExpanded13 } from '../data/breedProfilesExpanded13';
+import { breedProfilesExpanded14 } from '../data/breedProfilesExpanded14';
+import { breedProfilesExpanded15 } from '../data/breedProfilesExpanded15';
+import { breedProfilesExpanded16 } from '../data/breedProfilesExpanded16';
+import { breedProfilesExpanded17 } from '../data/breedProfilesExpanded17';
+import { breedProfilesExpanded18 } from '../data/breedProfilesExpanded18';
+import { breedProfilesExpanded19 } from '../data/breedProfilesExpanded19';
+import { breedProfilesExpanded20 } from '../data/breedProfilesExpanded20';
+import { breedProfilesExpanded21 } from '../data/breedProfilesExpanded21';
+import { breedProfilesExpanded22 } from '../data/breedProfilesExpanded22';
+import { breedProfilesExpanded23 } from '../data/breedProfilesExpanded23';
+import { breedProfilesExpanded24 } from '../data/breedProfilesExpanded24';
 
 // All long-form profiles, merged. Expanded profiles come last, so they replace
 // the shorter version of the same breed. Add future profile files here.
@@ -22,6 +43,27 @@ const allProfiles = {
   ...breedProfilesExpanded,
   ...breedProfilesExpanded2,
   ...breedProfilesExpanded3,
+  ...breedProfilesExpanded4,
+  ...breedProfilesExpanded5,
+  ...breedProfilesExpanded6,
+  ...breedProfilesExpanded7,
+  ...breedProfilesExpanded8,
+  ...breedProfilesExpanded9,
+  ...breedProfilesExpanded10,
+  ...breedProfilesExpanded11,
+  ...breedProfilesExpanded12,
+  ...breedProfilesExpanded13,
+  ...breedProfilesExpanded14,
+  ...breedProfilesExpanded15,
+  ...breedProfilesExpanded16,
+  ...breedProfilesExpanded17,
+  ...breedProfilesExpanded18,
+  ...breedProfilesExpanded19,
+  ...breedProfilesExpanded20,
+  ...breedProfilesExpanded21,
+  ...breedProfilesExpanded22,
+  ...breedProfilesExpanded23,
+  ...breedProfilesExpanded24,
 };
 
 // All quick-facts entries, merged. Add future batches here.

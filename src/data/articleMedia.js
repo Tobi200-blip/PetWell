@@ -79,4 +79,20 @@ export const articleMedia = {
       },
     },
   },
+
+  "positive-reinforcement-training": {
+    hero: {
+      file: "training-hero",
+      alt: "A dog sitting and looking up at its owner during training",
+    },
+    sections: {},
+  },
+
+  "foods-dogs-should-never-eat": {
+    hero: {
+      file: "foods-hero",
+      alt: "A dog looking at food on a kitchen counter",
+    },
+    sections: {},
+  },
 };
