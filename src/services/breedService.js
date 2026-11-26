@@ -136,5 +136,5 @@ export function getSimilarBreeds(slug, limit = 3) {
   if (!current) return [];
   return allBreeds
     .filter((b) => b.slug !== slug && b.size === current.size)
-    .slice(0, limit);
+    .slice(0, liit);
 }
