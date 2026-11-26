@@ -31,6 +31,9 @@ import { breedProfilesExpanded21 } from '../data/breedProfilesExpanded21';
 import { breedProfilesExpanded22 } from '../data/breedProfilesExpanded22';
 import { breedProfilesExpanded23 } from '../data/breedProfilesExpanded23';
 import { breedProfilesExpanded24 } from '../data/breedProfilesExpanded24';
+import { breedProfilesExpanded25 } from '../data/breedProfilesExpanded25';
+import { breedProfilesExpanded26 } from '../data/breedProfilesExpanded26';
+import { breedProfilesExpanded27 } from '../data/breedProfilesExpanded27';
 
 // All long-form profiles, merged. Expanded profiles come last, so they replace
 // the shorter version of the same breed. Add future profile files here.
@@ -64,6 +67,9 @@ const allProfiles = {
   ...breedProfilesExpanded22,
   ...breedProfilesExpanded23,
   ...breedProfilesExpanded24,
+  ...breedProfilesExpanded25,
+  ...breedProfilesExpanded26,
+  ...breedProfilesExpanded27,
 };
 
 // All quick-facts entries, merged. Add future batches here.
