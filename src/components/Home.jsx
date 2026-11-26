@@ -10,6 +10,8 @@ import othersImg from '../assets/categories/others.png';
 import { getFeaturedArticles, getArticles, getCategories } from '../services/articleService';
 import { getBreedCounts } from '../services/breedService';
 import { getCategoryMeta } from '../utils/articleCategories';
+import { getArticleImage } from '../utils/articleImages';
+import { articleMedia } from '../data/articleMedia';
 import { faqs } from '../data/faqs';
 import {
   IconHome as HomeIcon,
@@ -316,17 +318,29 @@ function Stat({ value, label }) {
 
 function ArticleRow({ article }) {
   const { icon: Icon, bg, color } = getCategoryMeta(article.category);
+  const hero = articleMedia[article.slug]?.hero;
+  const image = getArticleImage(hero?.file);
   return (
     <Link
       to={`/articles/${article.slug}`}
-      className="flex gap-3 items-center bg-gray-50 border border-gray-100 rounded-lg p-4 hover:bg-gray-100 transition-colors"
+      className="group bg-gray-50 border border-gray-100 rounded-xl overflow-hidden hover:bg-gray-100 transition-colors flex flex-col"
     >
-      <div className={`size-10 rounded-lg ${bg} flex items-center justify-center shrink-0 shadow-sm`}>
-        <Icon className={`size-[18px] ${color}`} stroke={2} />
-      </div>
-      <div>
+      {image ? (
+        <img
+          src={image}
+          alt={hero?.alt || article.title}
+          loading="lazy"
+          decoding="async"
+          className="w-full aspect-[16/10] object-cover"
+        />
+      ) : (
+        <div className={`w-full aspect-[16/10] ${bg} flex items-center justify-center`}>
+          <Icon className={`size-10 ${color}`} stroke={1.5} />
+        </div>
+      )}
+      <div className="p-4">
         <p className="text-sm font-medium">{article.title}</p>
-        <p className="text-xs text-gray-400">{article.readTime} min read</p>
+        <p className="text-xs text-gray-400 mt-1">{article.readTime} min read</p>
       </div>
     </Link>
   );
