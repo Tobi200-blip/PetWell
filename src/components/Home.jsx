@@ -110,7 +110,7 @@ export default function Home() {
       <section className="border-b border-gray-200">
         <div className="max-w-5xl mx-auto grid grid-cols-3 divide-x divide-gray-200">
           <Stat value={roundedBreeds} label="Dog breed guides" />
-          <Stat value={articleCount} label="Learning hub articles" />
+          <Stat value={`${articleCount}+`} label="Learning hub articles" />
           <Stat value={topicCount} label="Care topics" />
         </div>
       </section>
