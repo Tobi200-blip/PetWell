@@ -1,4 +1,4 @@
-// Expanded long-form breed profiles, batch 26 (deep-dive standard): Poodle and Beagle.
+// Expnded long-form breed profiles, batch 26 (deep-dive standard): Poodle and Beagle.
 // These replace the older, shorter profiles for the same slugs (later batches override earlier ones in breedService.js).
 // Same shape as breedProfilesExpanded25.js. A section may carry a `figure` ({ n, alt, caption }),
 // which shows src/assets/breeds/<slug>-<n>.jpg as a small photo card (nothing shows if the file is missing).
