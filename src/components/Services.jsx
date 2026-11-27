@@ -73,7 +73,7 @@ export default function Services() {
                 setZip(e.target.value);
                 setSubmitted(false);
               }}
-              placeholder="Enter your zip code"
+              placeholder="Enter your postal code or city"
               aria-label="Your location"
               className="bg-transparent outline-none text-sm w-full"
             />
