@@ -9,6 +9,7 @@ import Logo from './Logo';
 
 const navLinks = [
   { label: 'Dog Breeds', to: '/breeds', isActive: (p) => p.startsWith('/breed') },
+  { label: 'Cat Breeds', to: '/cats', isActive: (p) => p.startsWith('/cat') },
   { label: 'Learning Hub', to: '/articles', isActive: (p) => p.startsWith('/articles') },
   { label: 'Pet Services', to: '/services', isActive: (p) => p.startsWith('/services') },
   { label: 'Insurance', to: '/insurance', isActive: (p) => p.startsWith('/insurance') },
