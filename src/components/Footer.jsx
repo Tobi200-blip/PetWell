@@ -153,6 +153,7 @@ export default function Footer() {
             links={[
               { label: "Privacy policy", to: "/privacy" },
               { label: "Terms of service", to: "/terms" },
+              { label: "Image credits", to: "/image-credits" },
             ]}
           />
         </div>
