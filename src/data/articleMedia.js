@@ -95,4 +95,28 @@ export const articleMedia = {
     },
     sections: {},
   },
+
+  "puppy-proofing-your-home": {
+    hero: {
+      file: "puppyproofing-hero",
+      alt: "A puppy exploring a living room floor",
+    },
+    sections: {},
+  },
+
+  "dog-dental-care": {
+    hero: {
+      file: "dental-hero",
+      alt: "A dog showing its clean teeth",
+    },
+    sections: {},
+  },
+
+  "how-to-house-train-a-puppy": {
+    hero: {
+      file: "housetraining-hero",
+      alt: "A puppy sitting on grass outdoors",
+    },
+    sections: {},
+  },
 };
