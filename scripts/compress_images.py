@@ -7,7 +7,7 @@ RUN from the PetWell folder (the one that contains src/ and scripts/):
   python3 scripts/compress_images.py --dry-run     (shows savings, changes nothing)
   python3 scripts/compress_images.py               (does it)
 
-What it does, for every .jpg/.jpeg in src/assets/breeds and src/assets/articles:
+What it does, for every .jpg/.jpeg in src/assets/breeds, src/assets/articles and src/assets/cats:
   - scales down so the longest side is at most 1000 px (never enlarges)
   - re-saves as an optimised progressive JPEG at quality 80
   - removes hidden camera/location metadata (EXIF) and fixes rotated photos
@@ -31,7 +31,7 @@ try:
 except ImportError:
     sys.exit("Pillow is not installed. Run:  pip install pillow")
 
-DEFAULT_DIRS = ["src/assets/breeds", "src/assets/articles"]
+DEFAULT_DIRS = ["src/assets/breeds", "src/assets/articles", "src/assets/cats"]
 MANIFEST = "compressed-manifest.json"
 BACKUP = "scripts/originals-backup"
 
