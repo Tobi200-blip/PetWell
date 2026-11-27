@@ -5,6 +5,8 @@ import RouteMeta from './components/RouteMeta';
 import Home from './components/Home';
 import Breeds from './components/Breeds';
 import BreedDetail from './components/BreedDetail';
+import Cats from './components/Cats';
+import CatDetail from './components/CatDetail';
 import Articles from './components/Articles';
 import ArticleDetail from './components/ArticleDetail';
 import Search from './components/Search';
@@ -26,6 +28,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/breeds" element={<Breeds />} />
         <Route path="/breed/:slug" element={<BreedDetail />} />
+        <Route path="/cats" element={<Cats />} />
+        <Route path="/cat/:slug" element={<CatDetail />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/articles/:slug" element={<ArticleDetail />} />
         <Route path="/search" element={<Search />} />
