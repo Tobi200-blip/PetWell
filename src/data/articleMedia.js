@@ -174,4 +174,23 @@ export const articleMedia = {
       },
     },
   },
+
+  "dog-separation-anxiety": {
+    hero: {
+      file: "separation-hero",
+      alt: "A dog looking out of a window waiting",
+    },
+    sections: {
+      "Enrichment, exercise, and routine": {
+        file: "separation-enrichment",
+        alt: "A dog enjoying a stuffed chew toy",
+        caption: "Stuffed chews and puzzle feeders give your dog something calm and positive to do.",
+      },
+      "Step 2: practice very short absences": {
+        file: "separation-door",
+        alt: "A dog resting calmly near a front door",
+        caption: "Build up from a few seconds at the door, and stay below the point where your dog gets upset.",
+      },
+    },
+  },
 };
