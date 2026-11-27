@@ -111,6 +111,9 @@ ARTICLES = {
     "dental-chews": "dog chew toy",
     "housetraining-outside": "puppy outdoors grass",
     "housetraining-crate": "puppy crate",
+    "separation-hero": "dog looking window",
+    "separation-enrichment": "dog chew toy",
+    "separation-door": "dog waiting door",
 }
 
 # suffix -> (query template, index among matching results). Card photo and -1 use different results.
