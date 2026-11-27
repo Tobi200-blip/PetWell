@@ -246,6 +246,19 @@ function ArticleSection({ section, id, figure }) {
         </div>
       ))}
 
+      {section.fullGuide && (
+        <Link
+          to={`/articles/${section.fullGuide.slug}`}
+          className="flex items-center justify-between gap-3 bg-white border border-gray-200 rounded-lg px-4 py-3 mb-4 hover:border-blue-300 hover:bg-blue-50 transition-colors"
+        >
+          <span>
+            <span className="block text-xs font-semibold text-blue-700 mb-0.5">Read the full guide</span>
+            <span className="block text-sm text-gray-700">{section.fullGuide.label}</span>
+          </span>
+          <span aria-hidden="true" className="text-blue-600">&rarr;</span>
+        </Link>
+      )}
+
       {section.callout && (
         <div className="bg-blue-50 border border-blue-100 rounded-lg px-4 py-3">
           <p className="text-xs font-semibold text-blue-700 mb-1">{section.callout.title}</p>
