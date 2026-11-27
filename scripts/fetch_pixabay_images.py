@@ -79,6 +79,7 @@ BREEDS = {
     "border-collie": "Border Collie",
     "rottweiler": "Rottweiler",
     "dachshund": "Dachshund",
+    "boxer": "Boxer",
 }
 
 # Learning Hub article photos: file name -> search phrase
