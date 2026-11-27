@@ -224,4 +224,184 @@ export const breedProfilesExpanded29 = {
           caption: "The short coat is easy to care for with a weekly brush.",
         },
         paragraphs: [
-          "The Boxer's short, smooth coat is among the easiest to care for. It sheds lightly to moderately all year, and the short, fine hair
+          "The Boxer's short, smooth coat is among the easiest to care for. It sheds lightly to moderately all year, and the short, fine hairs can work their way into fabrics. The coat has little doggy odor, and many Boxers clean themselves like cats.",
+          "Brush once a week with a rubber curry brush or a grooming mitt to remove loose hair and keep the coat glossy. A damp cloth or chamois can add shine after brushing. Brush more often during heavier shedding periods.",
+          "Bathe only when your dog is dirty or smelly, usually every two to three months. Use a gentle dog shampoo, rinse thoroughly, and dry the coat well. Many Boxers have sensitive skin, so avoid harsh products and bathing too often.",
+          "Clean the facial wrinkles gently, because moisture and dirt can collect there. Wipe the folds with a soft, damp cloth, and dry them thoroughly. Wipe the lips and chin as needed, since Boxers drool.",
+          "Trim the nails every two to three weeks. Boxers have strong nails that grow quickly, and a dog that is used to nail care from puppyhood is much easier to handle. Use grooming time as a health check. Feel for lumps, which are particularly important in a breed prone to skin tumors, check the skin for redness, bumps, or parasites, and look at the eyes, ears, and teeth. White and light-coated Boxers burn easily, so use a dog-safe sunscreen on exposed skin if advised by your vet.",
+        ],
+        lists: [
+          {
+            title: "A simple grooming schedule",
+            items: [
+              "Brush: once a week, more during heavier shedding",
+              "Bathe: every two to three months, or as needed",
+              "Facial wrinkles and lips: wipe a few times a week",
+              "Nails: every two to three weeks",
+              "Ears: check weekly and clean only when needed",
+              "Teeth: brush daily or at least several times a week",
+              "Skin and lump check: during every grooming session",
+            ],
+          },
+        ],
+      },
+      {
+        id: "eyes",
+        title: "Eye care",
+        paragraphs: [
+          "Boxers can suffer from several eye conditions. The best known is the corneal ulcer, sometimes called a Boxer ulcer, a slow-healing sore on the surface of the eye. Other problems include entropion, in which the eyelid rolls inward and rubs on the eye, ectropion, in which the lower lid droops, distichiasis, in which extra eyelashes irritate the surface, dry eye, and cataracts.",
+          "Check the eyes every day. Wipe away normal discharge with a clean, damp cloth or cotton pad, using a fresh one for each eye. Do not use human eye drops unless your vet recommends them.",
+          "Contact your vet promptly if you see redness, squinting, cloudiness, a bluish haze, thick or colored discharge, rubbing at the eye, or any change in vision. Corneal ulcers are painful and can worsen quickly, so treat any squinting or watery eye as urgent. Entropion often needs surgical correction.",
+          "Yearly eye exams are a good idea, and responsible breeders have their dogs examined by a veterinary ophthalmologist before breeding.",
+        ],
+      },
+      {
+        id: "ears",
+        title: "Ear care",
+        paragraphs: [
+          "Boxers with natural ears have medium-sized folded ears that cover the ear canal, which limits air circulation. Moisture and wax can build up, and ear infections can occur, particularly in dogs with allergies.",
+          "Check the ears weekly for redness, odor, discharge, or signs of discomfort. Healthy ears are pale pink and mostly clean, with no strong smell. If the ears look dirty, use a vet-approved ear cleaner on a cotton ball, wipe only the visible part, and let your dog shake its head.",
+          "Never push cotton swabs into the ear canal. Dry the ears after bathing or swimming. Allergies can contribute to recurring problems, so long-term management with your vet is common. If your dog has cropped ears, ask your vet about extra cleaning.",
+          "See your vet if your dog shakes its head often, scratches its ears, holds its head tilted, or has redness, discharge, or a bad smell. Ear infections need a proper diagnosis, because the wrong treatment can make things worse. White Boxers can be born deaf in one or both ears, so test hearing in any white puppy.",
+        ],
+      },
+      {
+        id: "dental",
+        title: "Dental care",
+        paragraphs: [
+          "Dental disease is a problem for dogs of every breed. The Boxer's undershot jaw and crowded teeth make plaque and tartar build up easily, which can lead to gum disease, painful teeth, and infection that spreads to other organs. Boxers are also prone to gum overgrowth, called gingival hyperplasia. Starting care early is the best prevention.",
+          "Brush your dog's teeth daily if you can, or at least several times a week, using a dog toothbrush and dog toothpaste. Never use human toothpaste. Start while your dog is young, and make it a calm routine with praise and a reward.",
+          "Dental chews and toys can help reduce plaque but do not replace brushing. Look for products approved by a recognized veterinary dental council, and avoid very hard items such as bones, antlers, and hard nylon toys, which can break teeth.",
+          "Your vet will check the mouth at each visit and may recommend a professional cleaning. Because Boxers are brachycephalic and can have heart disease, anesthesia needs extra care, so talk to your vet about the safest approach. See a vet if you notice bad breath, red, swollen, or bleeding gums, a broken tooth, or reluctance to eat.",
+        ],
+      },
+      {
+        id: "health",
+        title: "Health and lifespan",
+        paragraphs: [
+          "Boxers typically live about 10 to 12 years. They are generally active, strong dogs, but the breed is prone to several serious conditions, particularly cancer and heart disease. Knowing what to watch for helps you catch problems early.",
+          "Regular veterinary checkups, a lean body weight, heat caution, and early attention to changes in behavior, energy, or lumps make the biggest difference. Choosing a breeder who health-tests their dogs also matters a great deal.",
+          "See a vet promptly for fainting or collapse, coughing, tiring easily, a swollen belly, unproductive retching, red or painful eyes, difficulty breathing, a lump that is growing or changing, weakness in the back legs, or seizures.",
+        ],
+        lists: [
+          {
+            title: "Conditions to know about",
+            items: [
+              "Cancer: mast cell tumors, lymphoma, brain tumors, and others",
+              "Boxer cardiomyopathy (ARVC): an inherited heart rhythm disease",
+              "Subaortic stenosis: a narrowing below the aortic valve",
+              "Dilated cardiomyopathy",
+              "Hip dysplasia and degenerative myelopathy",
+              "Bloat (gastric dilatation-volvulus): a life-threatening twisting of the stomach",
+              "Brachycephalic airway syndrome and heat intolerance",
+              "Corneal ulcers and other eye problems",
+              "Hypothyroidism: an underactive thyroid gland",
+              "Allergies, skin problems, and epilepsy",
+              "Deafness in white Boxers",
+            ],
+          },
+        ],
+      },
+      {
+        id: "conditions",
+        title: "Health conditions explained",
+        paragraphs: [
+          "Cancer is a leading cause of death in Boxers, and the breed is known to have a high rate of several types. Mast cell tumors are common skin tumors that can look like almost anything, from a small bump to a swelling that changes size. Lymphoma causes swollen lymph nodes, and brain tumors can cause seizures or behavior changes. Check your dog for lumps regularly, and have any new or changing lump examined by your vet without waiting, since early diagnosis and removal give the best results. A vet diagnoses lumps with a needle sample or biopsy.",
+          "Boxer cardiomyopathy, also called arrhythmogenic right ventricular cardiomyopathy, is an inherited heart disease in which the heart muscle is replaced by fat and scar tissue, causing irregular heartbeats. Some dogs show no signs for years, while others faint, collapse, or die suddenly. Signs can include weakness, fainting after exercise, and, later, coughing or tiredness. A vet diagnoses it with a heart rhythm recording and an ultrasound, and treatment uses medication to control the rhythm. A DNA test is available, but it does not catch every dog, so many breeders also use yearly heart monitoring. Because dogs can look healthy while affected, screening is a key part of responsible breeding.",
+          "Subaortic stenosis is an inherited narrowing below the aortic valve that makes the heart work harder. Mild cases may cause no signs, while severe cases cause fainting, exercise intolerance, and sudden death. It is often first noticed as a heart murmur in a young dog. Responsible breeders have their dogs examined by a veterinary cardiologist.",
+          "Bloat is a life-threatening emergency. The stomach fills with gas and may twist on itself, cutting off blood flow. Signs include a swollen belly, drooling, unproductive retching, restlessness, and collapse. A dog can die within hours, and treatment is emergency surgery. A preventive procedure called a gastropexy can be done in advance, and many vets recommend it for deep-chested breeds.",
+          "Brachycephalic airway syndrome affects dogs with short muzzles. Narrow nostrils, a long soft palate, and a narrow windpipe make breathing harder, causing noisy breathing, snoring, and heat intolerance. Mild cases are managed by keeping the dog cool, lean, and calm, and severe cases may need surgery. Keep exercise gentle in warm weather, and treat labored breathing as an emergency.",
+          "Hip dysplasia is a malformed hip joint that causes wear, pain, and arthritis. Degenerative myelopathy is an inherited, progressive spinal cord disease that starts in older dogs with weakness and wobbliness in the back legs. A DNA test is available. Corneal ulcers are treated with eye medication and sometimes minor surgery. Hypothyroidism is managed well with daily medication, allergies show up as itching, paw licking, red skin, and ear infections, and epilepsy causes recurring seizures that many dogs control with medication. White Boxers are more likely to be deaf and to get sunburn and skin cancer.",
+        ],
+        note: {
+          title: "Important",
+          text: "This is general information, not a diagnosis. Always speak to your veterinarian if you are worried about your dog's health, and treat fainting, collapse, a swollen belly, or difficulty breathing as an emergency.",
+        },
+      },
+      {
+        id: "genetics",
+        title: "Health testing and choosing a puppy",
+        paragraphs: [
+          "The breeder you choose has more influence on your Boxer's health and temperament than almost anything else. A responsible breeder tests breeding dogs for inherited conditions, selects for sound, athletic builds and stable temperaments, raises puppies in a home environment, socializes them early, and carefully screens buyers.",
+          "Ask to see written proof of testing for both parents. Key checks for Boxers include a heart examination by a veterinary cardiologist, ideally with a 24-hour heart rhythm recording repeated each year, DNA tests for Boxer cardiomyopathy and degenerative myelopathy, hip evaluations, a thyroid test, and an eye examination. Ask about the family history of cancer and heart disease, including the ages at which relatives developed them and died, since longevity is a key concern in the breed.",
+          "Be cautious about breeders who sell puppies with no health information, who say the breed has no health problems, who advertise white Boxers as rare or valuable, who breed for extreme short muzzles, or who sell very young puppies. A good breeder will ask you many questions about your home and lifestyle, and may refuse to sell to an unsuitable home.",
+          "Adoption can also be a good route, and Boxers are common in breed rescues and shelters, often as young adults. A breed rescue can tell you about the dog's history, temperament, and health. Many rescued Boxers become loving companions, but be ready for the breed's heart and cancer screening needs and ask for a veterinary check.",
+        ],
+        lists: [
+          {
+            title: "Questions to ask a breeder",
+            items: [
+              "Can I see heart test results, including rhythm monitoring, for both parents?",
+              "Have the parents been DNA tested for Boxer cardiomyopathy and degenerative myelopathy?",
+              "What is the family history of cancer and heart disease, and at what ages?",
+              "Can I see hip and thyroid test results for both parents?",
+              "Will you take the dog back at any age if I cannot keep it?",
+            ],
+          },
+        ],
+      },
+      {
+        id: "lifestages",
+        title: "Puppy to senior: what changes",
+        paragraphs: [
+          "A Boxer's needs shift across its life. Planning for each stage helps you avoid problems and keep your dog healthy and happy.",
+        ],
+        lists: [
+          {
+            title: "Life stages",
+            items: [
+              "Puppy (to about 12 months): rapid growth, vaccinations as your vet advises, intensive socialization, house training, and a controlled-growth diet",
+              "Adolescent (about 12 to 36 months): a long, bouncy, strong-willed phase, so keep training and exercise up and protect joints",
+              "Adult (about 3 to 7 years): a playful, devoted companion, daily exercise, annual checkups with heart screening, regular lump checks, and careful weight management",
+              "Senior (from about 8 years): a slower pace, higher risk of cancer, heart disease, and joint problems, twice-yearly checkups, softer bedding, gentler exercise, and regular checks for lumps, coughing, and weakness",
+            ],
+          },
+          {
+            title: "Caring for an older Boxer",
+            items: [
+              "Keep exercising, but choose gentle walks and swimming",
+              "Ask your vet about heart monitoring, joint support, and pain management",
+              "Keep your dog lean and cool, and avoid hot weather",
+              "Use ramps and non-slip rugs to help a stiff dog get around",
+              "Check for lumps regularly, and report any new or changing lump promptly",
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Are Boxers good family dogs?",
+        a: "Yes, they are known for being playful, loyal, and patient with children they know. Their size and bounciness mean supervision with small children is important.",
+      },
+      {
+        q: "How much exercise does a Boxer need?",
+        a: "About 60 to 90 minutes a day, including vigorous play and walks, plus mental stimulation. Exercise in the cool parts of the day.",
+      },
+      {
+        q: "Do Boxers shed a lot?",
+        a: "They shed lightly to moderately all year. A weekly brush with a rubber mitt keeps the coat glossy.",
+      },
+      {
+        q: "Are Boxers easy to train?",
+        a: "They are intelligent and eager to please but exuberant and slow to mature. Short, fun, reward-based sessions work best.",
+      },
+      {
+        q: "Can Boxers live in hot climates?",
+        a: "With care. Their short muzzles make them prone to overheating, so they need shade, water, a cool indoor space, and exercise in the cool parts of the day.",
+      },
+      {
+        q: "Why do Boxers get cancer so often?",
+        a: "The breed has a high rate of several cancers, including mast cell tumors and lymphoma, though the exact reasons are not fully understood. Regular lump checks and vet visits help catch problems early.",
+      },
+      {
+        q: "Do Boxers drool and snore?",
+        a: "Many do. Their short muzzles and loose lips lead to drooling, snoring, and gas, which are usually normal but worth mentioning to your vet if breathing seems difficult.",
+      },
+      {
+        q: "How long do Boxers live?",
+        a: "Usually about 10 to 12 years. Good breeding, heart screening, a lean weight, and regular veterinary care help them live well.",
+      },
+    ],
+  },
+};
