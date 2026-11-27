@@ -159,20 +159,33 @@ export default function ArticleDetail() {
             <div className="grid sm:grid-cols-3 gap-4">
               {related.map((r) => {
                 const { icon: Icon, bg, color } = getCategoryMeta(r.category);
+                const relImage = getArticleImage(articleMedia[r.slug]?.hero?.file);
                 return (
                   <Link
                     key={r.slug}
                     to={`/articles/${r.slug}`}
-                    className="flex items-center gap-3 bg-white border border-gray-100 rounded-lg p-3 hover:shadow-sm transition-shadow"
+                    className="flex flex-col bg-white border border-gray-100 rounded-lg overflow-hidden hover:shadow-sm transition-shadow"
                   >
-                    <div className={`size-10 rounded-lg ${bg} flex items-center justify-center shrink-0 shadow-sm`}>
-                      <Icon className={`size-[18px] ${color}`} stroke={2} />
+                    {relImage ? (
+                      <img
+                        src={relImage}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full aspect-[16/10] object-cover"
+                      />
+                    ) : (
+                      <div className={`w-full aspect-[16/10] ${bg} flex items-center justify-center`}>
+                        <Icon className={`size-8 ${color}`} stroke={2} />
+                      </div>
+                    )}
+                    <div className="flex items-center gap-3 p-3 flex-1">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium leading-snug">{r.title}</p>
+                        <p className="text-xs text-gray-500 mt-0.5">{r.readTime} min read</p>
+                      </div>
+                      <ChevronRightIcon className="size-4 text-gray-500 shrink-0" />
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium leading-snug">{r.title}</p>
-                      <p className="text-xs text-gray-500 mt-0.5">{r.readTime} min read</p>
-                    </div>
-                    <ChevronRightIcon className="size-4 text-gray-500 shrink-0" />
                   </Link>
                 );
               })}
