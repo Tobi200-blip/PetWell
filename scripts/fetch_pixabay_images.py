@@ -219,6 +219,8 @@ def main():
     jobs = []  # (file name, query, words, index)
     if args.articles:
         for fname, q in ARTICLES.items():
+            if only and fname not in only:
+                continue
             jobs.append((fname + ".jpg", q, [], 0))
     else:
         for slug, name in BREEDS.items():
