@@ -77,6 +77,8 @@ BREEDS = {
     "beagle": "Beagle",
     "siberian-husky": "Siberian Husky",
     "border-collie": "Border Collie",
+    "rottweiler": "Rottweiler",
+    "dachshund": "Dachshund",
 }
 
 # Learning Hub article photos: file name -> search phrase
@@ -115,7 +117,10 @@ def api_search(key, query):
     os.makedirs(CACHE, exist_ok=True)
     cpath = os.path.join(CACHE, hashlib.sha1(query.encode()).hexdigest() + ".json")
     if os.path.exists(cpath) and time.time() - os.path.getmtime(cpath) < 24 * 3600:
-        return json.load(open(cpath, encoding="utf-8"))
+        try:
+            return json.load(open(cpath, encoding="utf-8"))
+        except ValueError:
+            os.remove(cpath)
     params = {"key": key, "q": query[:100], "image_type": "photo", "orientation": "horizontal",
               "safesearch": "true", "per_page": 30}
     url = API + "?" + urllib.parse.urlencode(params)
@@ -140,7 +145,11 @@ def api_search(key, query):
                 continue
             if e.code in (400, 401, 403):
                 sys.exit(f"Pixabay refused the request ({e.code}). Check that your API key is correct.")
-            raise
+            print("   search error", e.code, "for:", query)
+            time.sleep(3)
+        except (urllib.error.URLError, OSError, TimeoutError, ValueError) as e:
+            print("   search problem:", e)
+            time.sleep(3)
     return {"hits": []}
 
 
@@ -156,9 +165,30 @@ def pick(hits, words, idx):
 
 
 def download(url, path):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=60) as r, open(path, "wb") as f:
-        f.write(r.read())
+    """Download with retries. Returns True on success, False if it keeps failing."""
+    for attempt in range(3):
+        try:
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=60) as r:
+                data = r.read()
+            if len(data) < 2000:
+                raise OSError("file too small, probably not an image")
+            with open(path, "wb") as f:
+                f.write(data)
+            return True
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                time.sleep(30)
+            else:
+                time.sleep(3)
+            err = f"HTTP {e.code}"
+        except (urllib.error.URLError, OSError, TimeoutError) as e:
+            time.sleep(3)
+            err = str(e)
+        if os.path.exists(path):
+            os.remove(path)
+    print("   download failed:", err)
+    return False
 
 
 def breed_words(name):
@@ -214,8 +244,14 @@ def main():
             if h is None:
                 print("MISSING", fname, "(find one by hand)")
                 continue
+            img_url = h.get("largeImageURL") or h.get("webformatURL")
+            if not img_url:
+                print("FAILED ", fname, "(no image link in result, find one by hand)")
+                continue
+            if not download(img_url, path):
+                print("FAILED ", fname, "(run the script again later to retry)")
+                continue
             used.add(h["id"])
-            download(h["largeImageURL"], path)
             w.writerow([fname, q, h.get("user", ""), h.get("pageURL", "")])
             cf.flush()
             print("saved  ", fname, "<-", h.get("pageURL", ""))
