@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { matchPath, useLocation } from 'react-router-dom';
 import { getBreedBySlug } from '../services/breedService';
+import { getCatBySlug } from '../services/catService';
 import { getArticleBySlug } from '../services/articleService';
 
 const SITE = 'AllPetsLoft';
@@ -13,6 +14,11 @@ const staticPages = {
     title: `Dog breeds | ${SITE}`,
     description:
       'Browse dog breed guides covering history, temperament, exercise, feeding, grooming, training, and health.',
+  },
+  '/cats': {
+    title: `Cat breeds | ${SITE}`,
+    description:
+      'Browse cat breed guides covering history, temperament, play, feeding, grooming, and health.',
   },
   '/articles': {
     title: `Learning hub | ${SITE}`,
@@ -69,6 +75,19 @@ function getMeta(pathname) {
       description: trim(
         breed.profile?.summary ||
           `${breed.name}: ${breed.temperament}. Typical lifespan ${breed.lifespan}. Read about care, feeding, and health.`
+      ),
+    };
+  }
+
+  const catMatch = matchPath('/cat/:slug', pathname);
+  if (catMatch) {
+    const cat = getCatBySlug(catMatch.params.slug);
+    if (!cat) return { title: `Page not found | ${SITE}`, description: DEFAULT_DESC };
+    return {
+      title: `${cat.name} cat breed guide | ${SITE}`,
+      description: trim(
+        cat.profile?.summary ||
+          `${cat.name}: ${cat.temperament}. Typical lifespan ${cat.lifespan}. Read about care, feeding, and health.`
       ),
     };
   }
