@@ -162,7 +162,7 @@ export const articleMedia = {
       alt: "A puppy sitting on grass outdoors",
     },
     sections: {
-      "The basic routine": {
+      "The basic routine, step by step": {
         file: "housetraining-outside",
         alt: "A puppy waiting outside on grass",
         caption: "Take your puppy to the same spot, wait quietly, and reward straight away.",
