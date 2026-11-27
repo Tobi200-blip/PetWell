@@ -1,4 +1,4 @@
-import { cats } from '../data/cats';
+imort { cats } from '../data/cats';
 
 // Long-form cat profiles, merged. Add each new catProfilesN.js file here:
 //   import { catProfiles1 } from '../data/catProfiles1';
