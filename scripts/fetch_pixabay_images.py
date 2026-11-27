@@ -116,6 +116,37 @@ ARTICLES = {
     "separation-door": "dog waiting door",
 }
 
+CATS = {
+    "persian": "Persian",
+    "maine-coon": "Maine Coon",
+    "siamese": "Siamese",
+    "ragdoll": "Ragdoll",
+    "british-shorthair": "British Shorthair",
+    "bengal": "Bengal",
+    "sphynx": "Sphynx",
+    "scottish-fold": "Scottish Fold",
+    "abyssinian": "Abyssinian",
+    "russian-blue": "Russian Blue",
+    "norwegian-forest-cat": "Norwegian Forest Cat",
+    "birman": "Birman",
+    "burmese": "Burmese",
+    "american-shorthair": "American Shorthair",
+    "devon-rex": "Devon Rex",
+    "cornish-rex": "Cornish Rex",
+    "oriental-shorthair": "Oriental Shorthair",
+    "turkish-angora": "Turkish Angora",
+    "exotic-shorthair": "Exotic Shorthair",
+    "siberian": "Siberian",
+}
+
+CAT_SLOTS = {
+    "":   ("{b} cat", 1),
+    "-1": ("{b} cat", 0),
+    "-2": ("{b} cat playing", 0),
+    "-3": ("{b} cat grooming", 0),
+}
+FALLBACK_CAT_3 = "cat grooming brushing"
+
 # suffix -> (query template, index among matching results). Card photo and -1 use different results.
 SLOTS = {
     "":   ("{b} dog", 1),
@@ -219,6 +250,7 @@ def main():
     ap.add_argument("--out", default="pixabay-download")
     ap.add_argument("--only", default="")
     ap.add_argument("--articles", action="store_true")
+    ap.add_argument("--cats", action="store_true", help="download cat breed photos (use --out pixabay-cats)")
     args = ap.parse_args()
 
     key = os.environ.get("PIXABAY_API_KEY", "").strip()
@@ -236,11 +268,12 @@ def main():
                 continue
             jobs.append((fname + ".jpg", q, [], 0))
     else:
-        for slug, name in BREEDS.items():
+        source, slots = (CATS, CAT_SLOTS) if args.cats else (BREEDS, SLOTS)
+        for slug, name in source.items():
             if only and slug not in only:
                 continue
             words = breed_words(name)
-            for suffix, (tmpl, idx) in SLOTS.items():
+            for suffix, (tmpl, idx) in slots.items():
                 jobs.append((f"{slug}{suffix}.jpg", tmpl.format(b=name), words if suffix != "-3" else [], idx))
         if not only:
             print("Tip: run in small batches with --only so you stay within Pixabay's rules.")
@@ -258,7 +291,7 @@ def main():
             hits = [h for h in api_search(key, q).get("hits", []) if h["id"] not in used]
             h = pick(hits, words, idx)
             if h is None and fname.endswith("-3.jpg"):
-                hits = [x for x in api_search(key, FALLBACK_3).get("hits", []) if x["id"] not in used]
+                hits = [x for x in api_search(key, FALLBACK_CAT_3 if args.cats else FALLBACK_3).get("hits", []) if x["id"] not in used]
                 h = pick(hits, [], 0)
             if h is None:
                 print("MISSING", fname, "(find one by hand)")
