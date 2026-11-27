@@ -8,6 +8,7 @@ import catsImg from '../assets/categories/cats.jpg';
 import birdsImg from '../assets/categories/birds.jpg';
 import othersImg from '../assets/categories/others.png';
 import { getFeaturedArticles, getArticles, getCategories } from '../services/articleService';
+import { getCatCounts } from '../services/catService';
 import { getBreedCounts } from '../services/breedService';
 import { getCategoryMeta } from '../utils/articleCategories';
 import { getArticleImage } from '../utils/articleImages';
@@ -29,11 +30,12 @@ const counts = getBreedCounts();
 const roundedBreeds =
   counts.total >= 10 ? `${Math.floor(counts.total / 10) * 10}+` : String(counts.total);
 const articleCount = getArticles().length;
+const catCount = getCatCounts().total;
 const topicCount = getCategories().length;
 
 const species = [
   { image: dogsImg, label: "Dogs", desc: `${roundedBreeds} breed guides`, to: "/breeds", available: true },
-  { image: catsImg, label: "Cats", desc: "Guides on the way", to: null, available: false },
+  { image: catsImg, label: "Cats", desc: `${catCount} breed guides`, to: "/cats", available: true },
   { image: birdsImg, label: "Birds", desc: "Guides on the way", to: null, available: false },
   { image: othersImg, label: "Others", desc: "Rabbits, fish, reptiles and more", to: null, available: false },
 ];
@@ -153,7 +155,7 @@ export default function Home() {
                 Beyond breeds, the Learning Hub explains everyday pet care, from feeding and vaccinations to training and grooming, and our insurance section will help you compare cover so an unexpected vet bill does not catch you off guard. A services section for finding local vets, groomers, boarding, and trainers is on its way.
               </p>
               <p>
-                We are starting with dogs and growing from there, with cats, birds, and other pets coming next. Everything on AllPetsLoft is general information to help you learn and plan. It is not a replacement for a licensed veterinarian, who should always be your first call when your pet's health is in question.
+                We started with dogs and have now added cats, with birds and other pets coming next. Everything on AllPetsLoft is general information to help you learn and plan. It is not a replacement for a licensed veterinarian, who should always be your first call when your pet's health is in question.
               </p>
             </div>
           </div>
