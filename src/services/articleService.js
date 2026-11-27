@@ -4,6 +4,7 @@ import { longArticles2 } from '../data/articlesLong2';
 import { longArticles3 } from '../data/articlesLong3';
 import { longArticles4 } from '../data/articlesLong4';
 import { longArticles5 } from '../data/articlesLong5';
+import { longArticles6 } from '../data/articlesLong6';
 
 const WORDS_PER_MINUTE = 230;
 
@@ -42,6 +43,7 @@ const allLongArticles = [
   ...longArticles3,
   ...longArticles4,
   ...longArticles5,
+  ...longArticles6,
 ];
 
 // Long articles come first, and replace any short article with the same slug
