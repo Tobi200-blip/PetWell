@@ -15,6 +15,7 @@ dist-ssr
 # Download scripts and caches
 scripts/pixabay-download/
 scripts/.cache/
+scripts/originals-backup/
 .cache/
 __pycache__/
 *.py[cod]
