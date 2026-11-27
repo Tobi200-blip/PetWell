@@ -12,6 +12,13 @@ dist
 dist-ssr
 *.local
 
+# Download scripts and caches
+scripts/pixabay-download/
+scripts/.cache/
+.cache/
+__pycache__/
+*.py[cod]
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

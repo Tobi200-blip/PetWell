@@ -1,0 +1,226 @@
+#!/usr/bin/env python3
+"""
+Download photos from Pixabay (free licence) with the exact file names AllPetsLoft needs.
+
+SETUP (one time):
+  1. Log in at https://pixabay.com and open https://pixabay.com/api/docs/ . Your personal API key is shown there.
+  2. Install Python 3 (no extra packages needed).
+  3. NEVER paste your key into a chat or commit it to GitHub.
+
+RUN (from the folder where you saved this file):
+  Windows (PowerShell):  $env:PIXABAY_API_KEY="your_key"; python fetch_pixabay_images.py --only pug,akita
+  Mac/Linux/Termux:      PIXABAY_API_KEY=your_key python fetch_pixabay_images.py --only pug,akita
+
+Options:
+  --only pug,akita      only these breed slugs (RECOMMENDED: do 5 to 10 breeds at a time)
+  --articles            download the Learning Hub article photos instead of breeds
+  --out FOLDER          where to save (default: pixabay-download)
+
+Pixabay rules this script follows:
+  * Max 100 requests per 60 seconds: it waits between requests and honours the rate-limit headers.
+  * Responses are cached for 24 hours in the .cache folder, so repeats do not call the API again.
+  * Images are downloaded to your own folder (save them in your project; never hotlink Pixabay URLs).
+  * "Systematic mass downloads are not allowed": so run in small batches, not all 50 breeds at once.
+  * Pixabay asks you to show where images come from: add a credits note on the site (see credits.csv).
+
+IMPORTANT: it takes the best matching result whose tags mention the breed. ALWAYS look at every
+photo before using it (wrong breed, mixed breed, watermark, poor quality). Replace by hand if needed.
+Files that already exist are skipped.
+"""
+import argparse, csv, hashlib, json, os, sys, time, urllib.parse, urllib.request, urllib.error
+
+BREEDS = {
+    "australian-shepherd": "Australian Shepherd",
+    "great-dane": "Great Dane",
+    "dobermann": "Doberman Pinscher",
+    "shih-tzu": "Shih Tzu",
+    "yorkshire-terrier": "Yorkshire Terrier",
+    "bernese-mountain-dog": "Bernese Mountain Dog",
+    "cavalier-king-charles-spaniel": "Cavalier King Charles Spaniel",
+    "pug": "Pug",
+    "chihuahua": "Chihuahua",
+    "saint-bernard": "Saint Bernard",
+    "newfoundland": "Newfoundland dog",
+    "pomeranian": "Pomeranian",
+    "maltese": "Maltese dog",
+    "belgian-malinois": "Belgian Malinois",
+    "alaskan-malamute": "Alaskan Malamute",
+    "akita": "Akita",
+    "samoyed": "Samoyed",
+    "shiba-inu": "Shiba Inu",
+    "pembroke-welsh-corgi": "Pembroke Welsh Corgi",
+    "cocker-spaniel": "Cocker Spaniel",
+    "basset-hound": "Basset Hound",
+    "bichon-frise": "Bichon Frise",
+    "miniature-schnauzer": "Miniature Schnauzer",
+    "dalmatian": "Dalmatian",
+    "vizsla": "Vizsla",
+    "weimaraner": "Weimaraner",
+    "rhodesian-ridgeback": "Rhodesian Ridgeback",
+    "boston-terrier": "Boston Terrier",
+    "english-bulldog": "English Bulldog",
+    "whippet": "Whippet",
+    "greyhound": "Greyhound",
+    "cane-corso": "Cane Corso",
+    "english-mastiff": "English Mastiff",
+    "boerboel": "Boerboel",
+    "staffordshire-bull-terrier": "Staffordshire Bull Terrier",
+    "basenji": "Basenji",
+    "pekingese": "Pekingese",
+    "jack-russell-terrier": "Jack Russell Terrier",
+    "west-highland-white-terrier": "West Highland White Terrier",
+    "golden-retriever": "Golden Retriever",
+    "labrador-retriever": "Labrador Retriever",
+    "german-shepherd": "German Shepherd",
+    "french-bulldog": "French Bulldog",
+    "poodle": "Poodle",
+    "beagle": "Beagle",
+    "siberian-husky": "Siberian Husky",
+    "border-collie": "Border Collie",
+}
+
+# Learning Hub article photos: file name -> search phrase
+ARTICLES = {
+    "feeding-hero": "dog eating food bowl",
+    "feeding-puppy": "puppy eating food bowl",
+    "feeding-body-condition": "healthy dog standing side",
+    "insurance-hero": "person hugging dog",
+    "insurance-vet": "veterinarian examining dog",
+    "insurance-compare": "person laptop documents",
+    "vaccination-hero": "puppy veterinarian",
+    "vaccination-vet": "vet holding puppy",
+    "vaccination-social": "puppy meeting person",
+    "grooming-hero": "dog brushing grooming",
+    "grooming-brushing": "brushing dog coat",
+    "grooming-bath": "dog bath",
+    "training-hero": "dog training sit treat",
+    "foods-hero": "dog kitchen food",
+}
+
+# suffix -> (query template, index among matching results). Card photo and -1 use different results.
+SLOTS = {
+    "":   ("{b} dog", 1),
+    "-1": ("{b} dog", 0),
+    "-2": ("{b} dog running", 0),
+    "-3": ("{b} dog grooming", 0),
+}
+FALLBACK_3 = "dog grooming brushing"
+
+API = "https://pixabay.com/api/"
+CACHE = ".cache"
+UA = {"User-Agent": "allpetsloft-fetch/1.0"}
+
+
+def api_search(key, query):
+    os.makedirs(CACHE, exist_ok=True)
+    cpath = os.path.join(CACHE, hashlib.sha1(query.encode()).hexdigest() + ".json")
+    if os.path.exists(cpath) and time.time() - os.path.getmtime(cpath) < 24 * 3600:
+        return json.load(open(cpath, encoding="utf-8"))
+    params = {"key": key, "q": query[:100], "image_type": "photo", "orientation": "horizontal",
+              "safesearch": "true", "per_page": 30}
+    url = API + "?" + urllib.parse.urlencode(params)
+    for attempt in range(3):
+        try:
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=30) as r:
+                remaining = r.headers.get("X-RateLimit-Remaining")
+                reset = r.headers.get("X-RateLimit-Reset")
+                data = json.load(r)
+            json.dump(data, open(cpath, "w", encoding="utf-8"))
+            if remaining is not None and int(remaining) <= 1:
+                time.sleep(int(reset or 60) + 1)
+            else:
+                time.sleep(1.0)
+            return data
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                wait = int(e.headers.get("X-RateLimit-Reset", "60")) + 1
+                print("rate limited, waiting", wait, "seconds")
+                time.sleep(wait)
+                continue
+            if e.code in (400, 401, 403):
+                sys.exit(f"Pixabay refused the request ({e.code}). Check that your API key is correct.")
+            raise
+    return {"hits": []}
+
+
+def pick(hits, words, idx):
+    """Choose a hit whose tags mention the breed (if words given), skipping used ids."""
+    ok = []
+    for h in hits:
+        tags = h.get("tags", "").lower()
+        if words and not any(w in tags for w in words):
+            continue
+        ok.append(h)
+    return ok[min(idx, len(ok) - 1)] if ok else None
+
+
+def download(url, path):
+    req = urllib.request.Request(url, headers=UA)
+    with urllib.request.urlopen(req, timeout=60) as r, open(path, "wb") as f:
+        f.write(r.read())
+
+
+def breed_words(name):
+    skip = {"dog", "terrier", "hound", "the", "and", "of", "king", "charles"}
+    ws = [w for w in name.lower().replace("-", " ").split() if len(w) >= 4 and w not in skip]
+    return ws or [name.lower().split()[0]]
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default="pixabay-download")
+    ap.add_argument("--only", default="")
+    ap.add_argument("--articles", action="store_true")
+    args = ap.parse_args()
+
+    key = os.environ.get("PIXABAY_API_KEY", "").strip()
+    if not key:
+        sys.exit("Set PIXABAY_API_KEY first (see the top of this file).")
+    os.makedirs(args.out, exist_ok=True)
+    cp = os.path.join(args.out, "credits.csv")
+    new = not os.path.exists(cp)
+    only = {s.strip() for s in args.only.split(",") if s.strip()}
+
+    jobs = []  # (file name, query, words, index)
+    if args.articles:
+        for fname, q in ARTICLES.items():
+            jobs.append((fname + ".jpg", q, [], 0))
+    else:
+        for slug, name in BREEDS.items():
+            if only and slug not in only:
+                continue
+            words = breed_words(name)
+            for suffix, (tmpl, idx) in SLOTS.items():
+                jobs.append((f"{slug}{suffix}.jpg", tmpl.format(b=name), words if suffix != "-3" else [], idx))
+        if not only:
+            print("Tip: run in small batches with --only so you stay within Pixabay's rules.")
+
+    used = set()
+    with open(cp, "a", newline="", encoding="utf-8") as cf:
+        w = csv.writer(cf)
+        if new:
+            w.writerow(["file", "query", "photographer", "pixabay_page"])
+        for fname, q, words, idx in jobs:
+            path = os.path.join(args.out, fname)
+            if os.path.exists(path):
+                print("skip   ", fname)
+                continue
+            hits = [h for h in api_search(key, q).get("hits", []) if h["id"] not in used]
+            h = pick(hits, words, idx)
+            if h is None and fname.endswith("-3.jpg"):
+                hits = [x for x in api_search(key, FALLBACK_3).get("hits", []) if x["id"] not in used]
+                h = pick(hits, [], 0)
+            if h is None:
+                print("MISSING", fname, "(find one by hand)")
+                continue
+            used.add(h["id"])
+            download(h["largeImageURL"], path)
+            w.writerow([fname, q, h.get("user", ""), h.get("pageURL", "")])
+            cf.flush()
+            print("saved  ", fname, "<-", h.get("pageURL", ""))
+    print("\nDone. Check every photo by eye before using it. Credits:", cp)
+
+
+if __name__ == "__main__":
+    main()
