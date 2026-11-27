@@ -85,7 +85,18 @@ export const articleMedia = {
       file: "training-hero",
       alt: "A dog sitting and looking up at its owner during training",
     },
-    sections: {},
+    sections: {
+      "Essential skill 2: sit and down": {
+        file: "training-sit",
+        alt: "A dog sitting while its owner holds a treat",
+        caption: "Lure the position with a treat, then mark and reward the moment your dog is in place.",
+      },
+      "Puppies: early learning and socialization": {
+        file: "training-puppy",
+        alt: "A puppy being trained with a treat",
+        caption: "Keep puppy sessions short, gentle, and full of rewards.",
+      },
+    },
   },
 
   "foods-dogs-should-never-eat": {
@@ -93,7 +104,18 @@ export const articleMedia = {
       file: "foods-hero",
       alt: "A dog looking at food on a kitchen counter",
     },
-    sections: {},
+    sections: {
+      "Keeping the kitchen safe": {
+        file: "foods-kitchen",
+        alt: "A dog sitting politely in a kitchen",
+        caption: "Teach your dog to settle on a mat while you prepare food.",
+      },
+      "Safe treats and foods your dog can enjoy": {
+        file: "foods-safe",
+        alt: "A dog eating a small, safe treat",
+        caption: "Plain, dog-safe treats given in small amounts are the safest choice.",
+      },
+    },
   },
 
   "puppy-proofing-your-home": {
@@ -101,7 +123,18 @@ export const articleMedia = {
       file: "puppyproofing-hero",
       alt: "A puppy exploring a living room floor",
     },
-    sections: {},
+    sections: {
+      "Give your puppy safe things to chew": {
+        file: "puppyproofing-chew",
+        alt: "A puppy chewing a toy",
+        caption: "Offer plenty of safe chew toys so your puppy has something better to chew.",
+      },
+      "Garden and outdoor areas": {
+        file: "puppyproofing-garden",
+        alt: "A puppy exploring a fenced garden",
+        caption: "Check fences, gates, and plants before your puppy goes outside.",
+      },
+    },
   },
 
   "dog-dental-care": {
@@ -109,7 +142,18 @@ export const articleMedia = {
       file: "dental-hero",
       alt: "A dog showing its clean teeth",
     },
-    sections: {},
+    sections: {
+      "How to brush your dog's teeth": {
+        file: "dental-brushing",
+        alt: "A person brushing a dog's teeth",
+        caption: "Use a toothbrush and toothpaste made for dogs, and go slowly.",
+      },
+      "Chews, toys, and diets": {
+        file: "dental-chews",
+        alt: "A dog chewing a dental chew",
+        caption: "Dental chews can help, but they do not replace brushing.",
+      },
+    },
   },
 
   "how-to-house-train-a-puppy": {
@@ -117,6 +161,17 @@ export const articleMedia = {
       file: "housetraining-hero",
       alt: "A puppy sitting on grass outdoors",
     },
-    sections: {},
+    sections: {
+      "The basic routine": {
+        file: "housetraining-outside",
+        alt: "A puppy waiting outside on grass",
+        caption: "Take your puppy to the same spot, wait quietly, and reward straight away.",
+      },
+      "Using a crate": {
+        file: "housetraining-crate",
+        alt: "A puppy resting in a crate",
+        caption: "Introduce the crate with treats so it becomes a comfortable den.",
+      },
+    },
   },
 };
