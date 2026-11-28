@@ -13,6 +13,7 @@ import {
 import Navbar from './Navbar';
 import Footer from './Footer';
 import PageHero from './PageHero';
+import FramedImage from './FramedImage';
 import { getBreedImage } from '../utils/breedImages';
 import { getCatImage } from '../utils/catImages';
 import { VIBES, vibeKeysFor, getMatches, answersFromParams, paramsFromAnswers } from '../utils/matcher';
@@ -193,7 +194,7 @@ function MatchCard({ m, rank }) {
       <div className="flex flex-col sm:flex-row">
         <div className="relative sm:w-56 h-44 sm:h-auto bg-gray-100 shrink-0">
           {image ? (
-            <img src={image} alt={item.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+            <FramedImage src={image} alt={item.name} loading="lazy" className="absolute inset-0 w-full h-full" />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
               {kind === 'cat' ? <CatIcon className="size-10 text-blue-600" /> : <DogIcon className="size-10 text-blue-600" />}
