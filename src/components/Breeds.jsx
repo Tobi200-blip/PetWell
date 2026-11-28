@@ -7,6 +7,7 @@ import {
 } from '@tabler/icons-react';
 import { getBreeds, getBreedGroups } from '../services/breedService';
 import { getBreedImage } from '../utils/breedImages';
+import FramedImage from './FramedImage';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import PageHero from './PageHero';
@@ -221,11 +222,12 @@ function BreedCard({ breed }) {
     >
       <div className="h-44 bg-blue-50 overflow-hidden">
         {image ? (
-          <img
+          <FramedImage
             src={image}
             alt={breed.name}
             loading="lazy"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full"
+            imgClassName="group-hover:scale-105 transition-transform duration-300"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
