@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import PageHero from './PageHero';
 import FaqList from './Faq';
-import { faqCategories } from '../data/faqs';
+import { faqCategories } from '../data/siteFaqs';
 
 export default function FaqPage() {
   const [query, setQuery] = useState('');
