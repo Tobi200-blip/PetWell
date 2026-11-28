@@ -13,6 +13,7 @@ import { getBreedImage, getBreedFigure } from '../utils/breedImages';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import FaqList from './Faq';
+import FramedImage from './FramedImage';
 import NotFound from './NotFound';
 
 export default function BreedDetail() {
@@ -40,11 +41,11 @@ export default function BreedDetail() {
           </Link>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             {image ? (
-              <img
+              <FramedImage
                 src={image}
                 alt={breed.name}
                 fetchPriority="high"
-                className="w-full h-64 md:h-80 object-cover rounded-2xl"
+                className="w-full h-64 md:h-80 rounded-2xl"
               />
             ) : (
               <div className="w-full h-64 md:h-80 rounded-2xl bg-blue-100 flex items-center justify-center">
