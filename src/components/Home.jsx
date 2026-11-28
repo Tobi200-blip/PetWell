@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import Navbar from './Navbar';
+import FaqList from './Faq';
 import IconBadge from './IconBadge';
 import dogsImg from '../assets/categories/dogs.jpg';
 import catsImg from '../assets/categories/cats.jpg';
@@ -207,25 +208,12 @@ export default function Home() {
             <p className="text-sm text-gray-500">Quick answers to what pet owners ask most.</p>
           </div>
 
-          <div className="flex flex-col gap-3">
-            {faqs.map((f) => (
-              <details
-                key={f.q}
-                className="group bg-white border border-gray-200 rounded-xl px-5 py-4 open:shadow-sm"
-              >
-                <summary className="flex items-center justify-between gap-4 cursor-pointer text-sm md:text-base font-semibold list-none [&::-webkit-details-marker]:hidden">
-                  {f.q}
-                  <ChevronDownIcon
-                    className="size-5 text-blue-600 shrink-0 transition-transform group-open:rotate-180"
-                    stroke={2.25}
-                  />
-                </summary>
-                <p className="text-sm text-gray-600 leading-relaxed mt-3">{f.a}</p>
-              </details>
-            ))}
-          </div>
+          <FaqList faqs={faqs} />
 
           <div className="text-center mt-8">
+            <Link to="/faq" className="inline-block mb-5 text-sm font-medium text-blue-700 hover:underline">
+              See all questions &rarr;
+            </Link>
             <p className="text-sm text-gray-500 mb-3">Still have a question?</p>
             <Link
               to="/contact"
