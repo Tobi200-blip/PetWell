@@ -147,6 +147,7 @@ export default function Footer() {
             links={[
               { label: "About us", to: "/about" },
               { label: "Contact", to: "/contact" },
+              { label: "FAQ", to: "/faq" },
             ]}
           />
           <FooterColumn
