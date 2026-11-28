@@ -10,6 +10,7 @@ import Logo from './Logo';
 const navLinks = [
   { label: 'Dog Breeds', to: '/breeds', isActive: (p) => p.startsWith('/breed') },
   { label: 'Cat Breeds', to: '/cats', isActive: (p) => p.startsWith('/cat') },
+  { label: 'Breed Matcher', to: '/match', isActive: (p) => p.startsWith('/match') },
   { label: 'Learning Hub', to: '/articles', isActive: (p) => p.startsWith('/articles') },
   { label: 'Pet Services', to: '/services', isActive: (p) => p.startsWith('/services') },
   { label: 'Insurance', to: '/insurance', isActive: (p) => p.startsWith('/insurance') },
@@ -38,7 +39,7 @@ export default function Navbar() {
       <header className="flex items-center justify-between gap-6 px-6 md:px-12 py-4 border-b border-gray-200 bg-white relative z-20">
         <Logo />
 
-        <nav className="hidden md:flex items-center gap-8" aria-label="Main">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8" aria-label="Main">
           {navLinks.map((link) => {
             const active = link.isActive(pathname);
             return (
@@ -46,7 +47,7 @@ export default function Navbar() {
                 key={link.label}
                 to={link.to}
                 aria-current={active ? 'page' : undefined}
-                className={`text-sm font-medium pb-1 border-b-2 transition-colors ${
+                className={`text-sm font-medium pb-1 border-b-2 whitespace-nowrap transition-colors ${
                   active
                     ? 'text-blue-600 border-blue-600'
                     : 'text-gray-700 border-transparent hover:text-gray-900 hover:border-gray-300'
@@ -58,7 +59,7 @@ export default function Navbar() {
           })}
         </nav>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           <Link
             to="/search"
             aria-label="Search"
@@ -70,14 +71,14 @@ export default function Navbar() {
           </Link>
           <Link
             to="/contact"
-            className="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            className="bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg whitespace-nowrap hover:bg-blue-700 transition-colors"
           >
             Contact us
           </Link>
         </div>
 
         <button
-          className="md:hidden p-2 -mr-2"
+          className="lg:hidden p-2 -mr-2"
           onClick={() => setMenuOpen(true)}
           aria-label="Open menu"
         >
@@ -87,7 +88,7 @@ export default function Navbar() {
 
       {/* Mobile slide-out menu */}
       {menuOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
+        <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-black/40" onClick={() => setMenuOpen(false)} />
           <div className="absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-xl flex flex-col">
             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-200">
