@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import Navbar from './Navbar';
 import IconBadge from './IconBadge';
-import heroImg from '../assets/hero-pets.png';
 import dogsImg from '../assets/categories/dogs.jpg';
 import catsImg from '../assets/categories/cats.jpg';
 import birdsImg from '../assets/categories/birds.jpg';
@@ -80,8 +79,8 @@ export default function Home() {
       {/* Hero */}
       <section className="relative h-[420px] md:h-[520px] flex items-center">
         <img
-          src={heroImg}
-          alt="Happy pets"
+          src="/home-hero.jpg"
+          alt="A man playing with his dog"
           fetchPriority="high"
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover opacity-90"
