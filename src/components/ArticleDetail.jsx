@@ -12,6 +12,7 @@ import { getArticleImage } from '../utils/articleImages';
 import { articleMedia } from '../data/articleMedia';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import FaqList from './Faq';
 import NotFound from './NotFound';
 import PageHero from './PageHero';
 import healthHero from '../assets/heroes/health.jpg';
@@ -123,17 +124,7 @@ export default function ArticleDetail() {
             {faqs.length > 0 && (
               <section id="faq" className="mb-10 scroll-mt-6">
                 <h2 className="text-xl font-semibold mb-4">Frequently asked questions</h2>
-                <div className="flex flex-col gap-2">
-                  {faqs.map((f) => (
-                    <details key={f.q} className="group bg-gray-50 border border-gray-100 rounded-lg px-4 py-3">
-                      <summary className="flex items-center justify-between gap-4 cursor-pointer text-sm font-medium list-none [&::-webkit-details-marker]:hidden">
-                        {f.q}
-                        <ChevronDownIcon className="size-4 text-blue-600 shrink-0 transition-transform group-open:rotate-180" stroke={2.25} />
-                      </summary>
-                      <p className="text-sm text-gray-600 leading-relaxed mt-2">{f.a}</p>
-                    </details>
-                  ))}
-                </div>
+                <FaqList faqs={faqs} />
               </section>
             )}
 
