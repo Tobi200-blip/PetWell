@@ -6,6 +6,7 @@ import Footer from './Footer';
 import PageHero from './PageHero';
 import FaqList from './Faq';
 import { faqCategories } from '../data/siteFaqs';
+import faqHero from '../assets/articles/puppyproofing-garden.jpg';
 
 export default function FaqPage() {
   const [query, setQuery] = useState('');
@@ -48,6 +49,7 @@ export default function FaqPage() {
       <Navbar />
 
       <PageHero
+        image={faqHero}
         badge="Help"
         title="Frequently asked questions"
         subtitle="Quick answers about AllPetsLoft, our guides, and how to use the site."
