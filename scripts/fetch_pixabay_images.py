@@ -15,6 +15,11 @@ Options:
   --only pug,akita      only these breed slugs (RECOMMENDED: do 5 to 10 breeds at a time)
   --articles            download the Learning Hub article photos instead of breeds
   --out FOLDER          where to save (default: pixabay-download)
+  --wide --batch 1      re-download WIDE card photos for the breeds whose current photo is tall
+                        (portrait). 32 breeds in 4 batches of 8: --batch 1, 2, 3, 4. Saves only
+                        <breed>.jpg into the folder pixabay-wide. Wide photos only, dog tag required.
+  --pick 3              with --wide: use the 3rd good result instead (try this after deleting a
+                        photo you did not like, then run the same batch again)
 
 Pixabay rules this script follows:
   * Max 100 requests per 60 seconds: it waits between requests and honours the rate-limit headers.
@@ -156,6 +161,16 @@ SLOTS = {
 }
 FALLBACK_3 = "dog grooming brushing"
 
+# Breeds whose current card photo is tall (portrait) and shows cropped on the site.
+TALL = ["australian-shepherd", "beagle", "belgian-malinois", "boston-terrier", "cane-corso", "cavalier-king-charles-spaniel", "chihuahua", "cocker-spaniel", "dachshund", "dalmatian", "dobermann", "english-bulldog", "french-bulldog", "german-shepherd", "golden-retriever", "great-dane", "greyhound", "labrador-retriever", "miniature-schnauzer", "pekingese", "pembroke-welsh-corgi", "pomeranian", "pug", "rhodesian-ridgeback", "rottweiler", "saint-bernard", "samoyed", "shiba-inu", "shih-tzu", "staffordshire-bull-terrier", "vizsla", "weimaraner"]
+
+WIDE_MUST = {"dog", "dogs", "puppy", "puppies"}
+
+
+def is_wide(h):
+    return h.get("imageWidth", 0) / max(1, h.get("imageHeight", 1)) >= 1.3
+
+
 API = "https://pixabay.com/api/"
 CACHE = ".cache"
 UA = {"User-Agent": "allpetsloft-fetch/1.0"}
@@ -259,18 +274,36 @@ def main():
     ap.add_argument("--only", default="")
     ap.add_argument("--articles", action="store_true")
     ap.add_argument("--cats", action="store_true", help="download cat breed photos (use --out pixabay-cats)")
+    ap.add_argument("--wide", action="store_true", help="re-download wide card photos for the tall-photo breeds")
+    ap.add_argument("--batch", type=int, default=0, help="with --wide: 1 to 4 (8 breeds each)")
+    ap.add_argument("--pick", type=int, default=2, help="with --wide: which good result to use (default 2)")
     args = ap.parse_args()
 
     key = os.environ.get("PIXABAY_API_KEY", "").strip()
     if not key:
         sys.exit("Set PIXABAY_API_KEY first (see the top of this file).")
+    if args.wide and args.out == "pixabay-download":
+        args.out = "pixabay-wide"
     os.makedirs(args.out, exist_ok=True)
     cp = os.path.join(args.out, "credits.csv")
     new = not os.path.exists(cp)
     only = {s.strip() for s in args.only.split(",") if s.strip()}
 
     jobs = []  # (file name, query, words, index)
-    if args.articles:
+    if args.wide:
+        slugs = TALL
+        if args.batch:
+            if not 1 <= args.batch <= 4:
+                sys.exit("--batch must be 1, 2, 3 or 4")
+            slugs = TALL[(args.batch - 1) * 8: args.batch * 8]
+        for slug in slugs:
+            if only and slug not in only:
+                continue
+            name = BREEDS.get(slug, slug.replace("-", " ").title())
+            jobs.append((f"{slug}.jpg", f"{name} dog", breed_words(name), max(0, args.pick - 1)))
+        if not args.batch and not only:
+            print("Tip: add --batch 1 (then 2, 3, 4) so you stay within Pixabay's rules.")
+    elif args.articles:
         for fname, q in ARTICLES.items():
             if only and fname not in only:
                 continue
@@ -297,7 +330,9 @@ def main():
                 print("skip   ", fname)
                 continue
             hits = [h for h in api_search(key, q).get("hits", []) if h["id"] not in used]
-            must = CAT_MUST if args.cats else ()
+            if args.wide:
+                hits = [h for h in hits if is_wide(h)]
+            must = CAT_MUST if args.cats else (WIDE_MUST if args.wide else ())
             h = pick(hits, words, idx, must)
             if h is None and fname.endswith("-3.jpg"):
                 hits = [x for x in api_search(key, FALLBACK_CAT_3 if args.cats else FALLBACK_3).get("hits", []) if x["id"] not in used]
