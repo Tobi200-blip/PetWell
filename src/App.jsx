@@ -18,6 +18,7 @@ import Privacy from './components/Privacy';
 import Terms from './components/Terms';
 import ImageCredits from './components/ImageCredits';
 import FaqPage from './components/FaqPage';
+import BreedMatcher from './components/BreedMatcher';
 import NotFound from './components/NotFound';
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/match" element={<BreedMatcher />} />
         <Route path="/faq" element={<FaqPage />} />
         <Route path="/image-credits" element={<ImageCredits />} />
         <Route path="*" element={<NotFound />} />
