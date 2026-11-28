@@ -137,6 +137,7 @@ export default function Footer() {
             links={[
               { label: "Dog breeds", to: "/breeds" },
               { label: "Cat breeds", to: "/cats" },
+              { label: "Breed matcher", to: "/match" },
               { label: "Learning hub", to: "/articles" },
               { label: "Insurance", to: "/insurance" },
               { label: "Pet services", to: "/services" },
