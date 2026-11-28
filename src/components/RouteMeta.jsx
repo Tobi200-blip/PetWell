@@ -50,6 +50,10 @@ const staticPages = {
     title: `Terms of service | ${SITE}`,
     description: 'The terms for using AllPetsLoft.',
   },
+  '/faq': {
+    title: `FAQ | ${SITE}`,
+    description: 'Quick answers about AllPetsLoft, our breed guides, health information, and how to use the site.',
+  },
   '/image-credits': {
     title: `Image credits | ${SITE}`,
     description: 'Where the photos on AllPetsLoft come from and how to request a credit or removal.',
