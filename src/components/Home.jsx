@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 import Navbar from './Navbar';
@@ -85,6 +86,7 @@ export default function Home() {
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover opacity-90"
         />
+        <HeroVideo />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
         <div className="absolute inset-0 bg-black/10" />
         <div className="relative z-10 px-6 md:px-16 max-w-xl">
@@ -345,5 +347,39 @@ function ArticleRow({ article }) {
         <p className="text-xs text-gray-400 mt-1">{article.readTime} min read</p>
       </div>
     </Link>
+  );
+}
+
+// Background video for the hero. Files live in /public: home-hero.mp4 and home-hero.jpg.
+// It fades in only once it can play, so if the file is missing, slow to load, or the visitor
+// prefers reduced motion or data saving, the normal hero photo simply stays.
+function HeroVideo() {
+  const [ready, setReady] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  const skip =
+    typeof window !== 'undefined' &&
+    (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ||
+      navigator.connection?.saveData === true);
+
+  if (failed || skip) return null;
+
+  return (
+    <video
+      src="/home-hero.mp4"
+      poster="/home-hero.jpg"
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      aria-hidden="true"
+      tabIndex={-1}
+      onCanPlay={() => setReady(true)}
+      onError={() => setFailed(true)}
+      className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-1000 ${
+        ready ? 'opacity-100' : 'opacity-0'
+      }`}
+    />
   );
 }
