@@ -201,11 +201,19 @@ def api_search(key, query):
     return {"hits": []}
 
 
-def pick(hits, words, idx):
-    """Choose a hit whose tags mention the breed (if words given), skipping used ids."""
+CAT_MUST = {"cat", "cats", "kitten", "kittens"}
+
+
+def pick(hits, words, idx, must=()):
+    """Choose a hit whose tags mention the breed (if words given), skipping used ids.
+    `must`: if given, the hit must also carry one of these exact tags (used for cats,
+    so a search for "Cornish Rex" cannot return a Cornish pasty)."""
     ok = []
     for h in hits:
         tags = h.get("tags", "").lower()
+        taglist = {t.strip() for t in tags.split(",")}
+        if must and not (taglist & set(must)):
+            continue
         if words and not any(w in tags for w in words):
             continue
         ok.append(h)
@@ -289,10 +297,11 @@ def main():
                 print("skip   ", fname)
                 continue
             hits = [h for h in api_search(key, q).get("hits", []) if h["id"] not in used]
-            h = pick(hits, words, idx)
+            must = CAT_MUST if args.cats else ()
+            h = pick(hits, words, idx, must)
             if h is None and fname.endswith("-3.jpg"):
                 hits = [x for x in api_search(key, FALLBACK_CAT_3 if args.cats else FALLBACK_3).get("hits", []) if x["id"] not in used]
-                h = pick(hits, [], 0)
+                h = pick(hits, [], 0, must)
             if h is None:
                 print("MISSING", fname, "(find one by hand)")
                 continue
