@@ -138,6 +138,24 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Breed matcher */}
+      <section className="px-6 md:px-12 max-w-5xl mx-auto w-full">
+        <div className="rounded-2xl bg-blue-900 text-white px-6 py-8 md:px-10 md:py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+          <div>
+            <h2 className="text-xl md:text-2xl font-bold mb-2">Not sure which breed fits your life?</h2>
+            <p className="text-sm md:text-base text-blue-100 max-w-xl">
+              Answer a few quick questions about your home, activity level and the personality you want. We will suggest dog or cat breeds to look at first.
+            </p>
+          </div>
+          <Link
+            to="/match"
+            className="inline-flex items-center justify-center gap-2 h-12 px-7 bg-white text-blue-900 rounded-lg text-sm font-semibold hover:bg-blue-50 transition-colors shrink-0"
+          >
+            Find my match <ArrowRightIcon className="size-4" />
+          </Link>
+        </div>
+      </section>
+
       {/* What is AllPetsLoft */}
       <section className="bg-gray-50 py-16">
         <div className="px-6 md:px-12 max-w-5xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-start">
