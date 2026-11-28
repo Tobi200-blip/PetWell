@@ -50,6 +50,10 @@ const staticPages = {
     title: `Terms of service | ${SITE}`,
     description: 'The terms for using AllPetsLoft.',
   },
+  '/match': {
+    title: `Breed matcher quiz | ${SITE}`,
+    description: 'Answer a few quick questions about your home and lifestyle and find dog or cat breeds that suit you.',
+  },
   '/faq': {
     title: `FAQ | ${SITE}`,
     description: 'Quick answers about AllPetsLoft, our breed guides, health information, and how to use the site.',
