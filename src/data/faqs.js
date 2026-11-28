@@ -1,123 +1,48 @@
-// Site-wide FAQs. Only state things that are true today. Update as features go live.
-export const faqCategories = [
+// Homepage FAQ. General guidance only; keep answers pointing owners back to their vet.
+
+export const faqs = [
   {
-    id: 'about',
-    title: 'About AllPetsLoft',
-    items: [
-      {
-        q: 'What is AllPetsLoft?',
-        a: 'AllPetsLoft is a free place to learn about pets before and after you bring one home. You can read breed guides, browse our learning hub of pet care articles, and look through pet insurance and services information as it grows.',
-        link: { to: '/about', label: 'More about us' },
-      },
-      {
-        q: 'Which pets do you cover?',
-        a: 'Dog and cat breed guides are live. We plan to add more pet types over time, and we will announce them on the site as they are ready.',
-      },
-      {
-        q: 'Is AllPetsLoft only for one country?',
-        a: 'No. The site is written for pet owners anywhere in the world. Rules, costs and available services differ from place to place, so always check local requirements with your own vet or authorities.',
-      },
-    ],
+    q: "How often should I feed my dog?",
+    a: "Most adult dogs do well on two measured meals a day. Puppies usually need three or four smaller meals, moving to two as they grow. Use the feeding guide on the food label as a starting point, then adjust for your dog's age, activity level, and body condition, and ask your vet for a target weight if you are unsure.",
   },
   {
-    id: 'breeds',
-    title: 'Breed guides',
-    items: [
-      {
-        q: 'What is in a breed guide?',
-        a: 'Each guide covers the breed’s history, appearance, temperament, who it suits, daily care, feeding, training, grooming, common health conditions and life stages, plus a short list of frequently asked questions. Cat guides currently show the key facts, with full guides being added breed by breed.',
-        link: { to: '/breeds', label: 'Browse dog breeds' },
-      },
-      {
-        q: 'Can I trust that every dog of a breed will match its guide?',
-        a: 'No. A guide describes what is typical for a breed, but every animal is an individual. Temperament, size and health depend on genetics, upbringing and environment, and mixed-breed pets can differ a lot.',
-      },
-      {
-        q: 'The photo looks like the wrong breed. What should I do?',
-        a: 'Please tell us through the contact page with the breed name and we will replace it. Photos are chosen to illustrate a breed, and we want them to be accurate.',
-        link: { to: '/contact', label: 'Contact us' },
-      },
-      {
-        q: 'Where do your photos come from?',
-        a: 'Most photos are free-to-use images shared by photographers on Pixabay. You can read about this, and how to request a credit or a removal, on our image credits page.',
-        link: { to: '/image-credits', label: 'Image credits' },
-      },
-    ],
+    q: "How do I know if my dog is a healthy weight?",
+    a: "Run your hands along your dog's sides. You should be able to feel the ribs under a thin layer of fat without pressing hard, and from above there should be a visible waist behind the ribs. If you cannot feel the ribs, or the belly hangs low, your dog may be overweight, so speak to your vet about a feeding plan.",
   },
   {
-    id: 'health',
-    title: 'Health and safety',
-    items: [
-      {
-        q: 'Is the information on AllPetsLoft veterinary advice?',
-        a: 'No. Our guides and articles are general information to help you learn. They are not a diagnosis and not a substitute for a licensed veterinarian who can examine your pet.',
-      },
-      {
-        q: 'Have your guides been reviewed by a vet?',
-        a: 'Not yet. We do not show a “vet-reviewed” label on anything that has not been reviewed. If that changes, the review will be shown clearly on the guide itself.',
-      },
-      {
-        q: 'My pet seems unwell. What should I do?',
-        a: 'Contact a veterinarian or your nearest emergency animal clinic. Do not wait for a website to confirm a problem, especially for breathing trouble, collapse, poisoning, severe pain, or not eating or drinking.',
-      },
-      {
-        q: 'Which foods are dangerous for dogs?',
-        a: 'Several common foods can be harmful, including chocolate, grapes and raisins, onions and garlic, and anything sweetened with xylitol. Our learning hub has a full guide to foods dogs should never eat.',
-        link: { to: '/articles/foods-dogs-should-never-eat', label: 'Read the guide' },
-      },
-    ],
+    q: "How much exercise does my dog need?",
+    a: "It depends on breed, age, and health. A small companion breed may be happy with short daily walks, while working and herding breeds can need two hours or more of activity and mental stimulation. Each breed guide on AllPetsLoft lists the typical exercise needs.",
   },
   {
-    id: 'hub',
-    title: 'Learning hub',
-    items: [
-      {
-        q: 'What can I read in the learning hub?',
-        a: 'Pet care articles on topics such as training, feeding, house training, separation anxiety and pet insurance. We keep adding new guides.',
-        link: { to: '/articles', label: 'Open the learning hub' },
-      },
-      {
-        q: 'Do you have a guide for new puppy owners?',
-        a: 'Yes, there are guides on house training a puppy, positive reinforcement training and puppy-proofing your home. Start with house training if your puppy is new to your home.',
-        link: { to: '/articles/how-to-house-train-a-puppy', label: 'House training guide' },
-      },
-    ],
+    q: "When should my puppy get its first vaccinations?",
+    a: "Puppies usually start vaccinations at around six to eight weeks, with boosters every few weeks until about 16 weeks. Schedules vary by country and local disease risk, so follow the plan your own veterinarian sets.",
   },
   {
-    id: 'services',
-    title: 'Insurance and pet services',
-    items: [
-      {
-        q: 'Can I buy pet insurance on AllPetsLoft?',
-        a: 'Not yet. Insurance is coming soon. For now you can read how pet insurance works so you know what to look for when you compare policies.',
-        link: { to: '/insurance', label: 'Pet insurance' },
-      },
-      {
-        q: 'Can I find vets, groomers or trainers near me?',
-        a: 'Local listings are coming soon. We are waiting to include real providers rather than showing placeholder listings.',
-        link: { to: '/services', label: 'Pet services' },
-      },
-      {
-        q: 'I run a pet business. Can I be listed?',
-        a: 'We would like to hear from you. Send us a message with your business details and the area you serve.',
-        link: { to: '/contact', label: 'Get in touch' },
-      },
-    ],
+    q: "How often should my pet see a vet?",
+    a: "Most healthy adult pets benefit from a checkup at least once a year. Puppies need more frequent visits for vaccinations and early checks, and senior pets are often seen twice a year. See a vet sooner for any sudden change in appetite, energy, breathing, or behavior.",
   },
   {
-    id: 'contact',
-    title: 'Contact and privacy',
-    items: [
-      {
-        q: 'How can I contact AllPetsLoft?',
-        a: 'Use the contact page for questions, corrections, feedback or partnership enquiries.',
-        link: { to: '/contact', label: 'Contact us' },
-      },
-      {
-        q: 'What happens to my personal information?',
-        a: 'Our privacy policy explains what we collect and how it is used. Please read it if you plan to send us a message.',
-        link: { to: '/privacy', label: 'Privacy policy' },
-      },
-    ],
+    q: "Which human foods are dangerous for dogs?",
+    a: "Chocolate, grapes and raisins, onions and garlic, macadamia nuts, alcohol, caffeine, cooked bones, and xylitol (a sweetener found in some gum, sweets, and peanut butter) are all harmful. If your dog eats any of them, contact a vet straight away, even if it seems fine.",
+  },
+  {
+    q: "Can dogs cope with hot weather?",
+    a: "Many can, with care. Always provide shade and fresh water, avoid exercise in the hottest part of the day, and never leave a dog in a parked car. Flat-faced breeds such as bulldogs and pugs, and thick-coated breeds such as huskies and Samoyeds, struggle most with heat, so think carefully about breed choice if you live somewhere warm.",
+  },
+  {
+    q: "How do I choose the right breed for me?",
+    a: "Start with your home, time, and budget. Think about space, how active you are, grooming effort, climate, other pets and children, and the costs of food and vet care. Our breed directory lets you filter by size and group, and each profile covers exercise, grooming, and health needs so you can compare honestly.",
+  },
+  {
+    q: "Is pet insurance worth it?",
+    a: "It depends on your budget and how much risk you are comfortable with. Insurance can help with large, unexpected vet bills, but plans differ in what they cover, in waiting periods, and in exclusions for pre-existing conditions. Enrolling while your pet is young and healthy is generally better, and you should read the policy terms carefully before you buy.",
+  },
+  {
+    q: "Can AllPetsLoft replace my vet?",
+    a: "No. Our guides are general information to help you learn and plan. They are not a diagnosis or a substitute for professional veterinary advice, so always contact a licensed veterinarian about your pet's specific health.",
+  },
+  {
+    q: "Will you cover cats and birds?",
+    a: "Cats and birds are next on our list. We are starting with dogs and building out the other sections one at a time.",
   },
 ];
